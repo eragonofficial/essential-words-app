@@ -6,16 +6,26 @@ let wordsCache = null;
 function getWords() {
     if (!wordsCache) {
         try {
-            // Vercel serverless muhitida faylni to'g'ri topish yo'li
-            let filePath = path.join(__dirname, '../public/words.json');
-            if (!fs.existsSync(filePath)) {
-                filePath = path.join(process.cwd(), 'public', 'words.json');
+            // Vercel Serverless Function uchun ishlaydigan barcha ehtimoliy yo'llar
+            const possiblePaths = [
+                path.join(__dirname, '../public/words.json'),
+                path.join(process.cwd(), 'public', 'words.json'),
+                path.join(__dirname, 'public', 'words.json')
+            ];
+
+            let filePath = null;
+            for (const p of possiblePaths) {
+                if (fs.existsSync(p)) {
+                    filePath = p;
+                    break;
+                }
             }
 
-            if (fs.existsSync(filePath)) {
+            if (filePath) {
                 const raw = fs.readFileSync(filePath, 'utf8');
                 wordsCache = JSON.parse(raw);
             } else {
+                console.error('words.json fayli hech qaysi yo\'ldan topilmadi');
                 wordsCache = [];
             }
         } catch (e) {
