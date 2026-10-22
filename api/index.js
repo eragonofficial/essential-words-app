@@ -6,7 +6,12 @@ let wordsCache = null;
 function getWords() {
     if (!wordsCache) {
         try {
-            const filePath = path.join(process.cwd(), 'public', 'words.json');
+            // Vercel serverless muhitida faylni to'g'ri topish yo'li
+            let filePath = path.join(__dirname, '../public/words.json');
+            if (!fs.existsSync(filePath)) {
+                filePath = path.join(process.cwd(), 'public', 'words.json');
+            }
+
             if (fs.existsSync(filePath)) {
                 const raw = fs.readFileSync(filePath, 'utf8');
                 wordsCache = JSON.parse(raw);
@@ -14,7 +19,7 @@ function getWords() {
                 wordsCache = [];
             }
         } catch (e) {
-            console.error('Error loading words.json:', e);
+            console.error('words.json ni yuklashda xato:', e);
             wordsCache = [];
         }
     }
@@ -22,7 +27,7 @@ function getWords() {
 }
 
 module.exports = (req, res) => {
-    // Enable CORS
+    // CORS sozlamalari
     res.setHeader('Access-Control-Allow-Credentials', true);
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS');
@@ -47,7 +52,7 @@ module.exports = (req, res) => {
             if (word) {
                 return res.status(200).json({ success: true, data: word });
             } else {
-                return res.status(404).json({ success: false, error: 'Word not found' });
+                return res.status(404).json({ success: false, error: 'Soz topilmadi' });
             }
         }
 
@@ -65,13 +70,12 @@ module.exports = (req, res) => {
             const q = query.toLowerCase().trim();
             words = words.filter(w => 
                 (w.word && w.word.toLowerCase().includes(q)) ||
-                (w.definition && w.definition.toLowerCase().includes(q)) ||
-                (w.uzbekTranslation && w.uzbekTranslation.toLowerCase().includes(q)) ||
+                (w.definition && w.definition.toLowerCase().includes(q)) || 
+                (w.uzbekTranslation && w.uzbekTranslation.toLowerCase().includes(q)) || 
                 (w.synonyms && w.synonyms.toLowerCase().includes(q))
             );
         }
 
-        // Limit response size if no filters provided
         const limit = parseInt(urlObj.searchParams.get('limit') || '100', 10);
         const page = parseInt(urlObj.searchParams.get('page') || '1', 10);
         const startIndex = (page - 1) * limit;
