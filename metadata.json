@@ -1,0 +1,6 @@
+{
+  "name": "4000 Essential Words",
+  "description": "4000 Essential English Words vocabulary learning app with audio TTS, progress tracking, and quizzes",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

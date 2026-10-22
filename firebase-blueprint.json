@@ -1,0 +1,61 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile information",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "Auth UID" },
+        "email": { "type": "string", "description": "User email address" },
+        "displayName": { "type": "string", "description": "User display name" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Account creation time" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Last updated time" }
+      },
+      "required": ["userId", "createdAt"]
+    },
+    "UnitProgress": {
+      "title": "UnitProgress",
+      "description": "Progress state for a book unit",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "User ID" },
+        "bookNumber": { "type": "integer", "description": "Book number 1 to 4" },
+        "unitNumber": { "type": "integer", "description": "Unit number 1 to 30" },
+        "isUnlocked": { "type": "boolean", "description": "Whether unit is unlocked" },
+        "isPassed": { "type": "boolean", "description": "Whether quiz was passed" },
+        "score": { "type": "integer", "description": "Latest quiz score (0-100)" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Update timestamp" }
+      },
+      "required": ["userId", "bookNumber", "unitNumber", "isUnlocked", "isPassed"]
+    },
+    "WordProgress": {
+      "title": "WordProgress",
+      "description": "Learning status of an individual vocabulary word",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "User ID" },
+        "wordId": { "type": "integer", "description": "Room WordEntity ID" },
+        "bookNumber": { "type": "integer", "description": "Book number 1-4" },
+        "unitNumber": { "type": "integer", "description": "Unit number 1-30" },
+        "word": { "type": "string", "description": "Vocabulary word" },
+        "isLearned": { "type": "boolean", "description": "Learned status" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Update timestamp" }
+      },
+      "required": ["userId", "wordId", "word", "isLearned"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "User profile document"
+    },
+    "/users/{userId}/progress/{progressId}": {
+      "schema": { "$ref": "#/entities/UnitProgress" },
+      "description": "Progress records per unit for a user"
+    },
+    "/users/{userId}/words/{wordId}": {
+      "schema": { "$ref": "#/entities/WordProgress" },
+      "description": "Word learned state records for a user"
+    }
+  }
+}
