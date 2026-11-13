@@ -2,31 +2,73 @@ package com.example.ui.screens
 
 import android.media.AudioManager
 import android.media.ToneGenerator
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.VolumeUp
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.VolumeUp
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.example.ui.components.DualAudioButtons
+import com.example.ui.components.GlassActionButton
+import com.example.ui.components.GlassCard
+import com.example.ui.components.GlassLinearProgress
+import com.example.ui.components.GlassTier
+import com.example.ui.components.GlassTopAppBar
+import com.example.ui.components.PartOfSpeechBadge
+import com.example.ui.components.glassTextFieldColors
+import com.example.ui.theme.GlassCyanAccent
+import com.example.ui.theme.GlassCyanBorder
+import com.example.ui.theme.GlassCyanFill
+import com.example.ui.theme.GlassEmeraldAccent
+import com.example.ui.theme.GlassEmeraldBorder
+import com.example.ui.theme.GlassEmeraldFill
+import com.example.ui.theme.GlassRoseAccent
+import com.example.ui.theme.GlassRoseBorder
+import com.example.ui.theme.GlassRoseFill
+import com.example.ui.theme.TextBodyTranslucent
+import com.example.ui.theme.TextMetaTranslucent
+import com.example.ui.theme.TextPrimaryWhite
 import com.example.viewmodel.VocabularyViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun VocabularyPracticeScreen(
     bookNumber: Int,
@@ -40,16 +82,14 @@ fun VocabularyPracticeScreen(
     val toneGenerator = remember {
         try {
             ToneGenerator(AudioManager.STREAM_MUSIC, 100)
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             null
         }
     }
 
     DisposableEffect(Unit) {
         onDispose {
-            try {
-                toneGenerator?.release()
-            } catch (e: Exception) {}
+            try { toneGenerator?.release() } catch (_: Exception) {}
         }
     }
 
@@ -73,21 +113,17 @@ fun VocabularyPracticeScreen(
 
         isSubmitting = true
         val matched = cleanInput.equals(cleanTarget, ignoreCase = true) ||
-                (cleanTarget.contains(cleanInput, ignoreCase = true) && cleanInput.length >= 3)
+            (cleanTarget.contains(cleanInput, ignoreCase = true) && cleanInput.length >= 3)
 
         if (matched) {
             isCorrect = true
             feedback = "Correct! 🎉"
             score++
-            try {
-                toneGenerator?.startTone(ToneGenerator.TONE_PROP_BEEP, 200)
-            } catch (e: Exception) {}
+            try { toneGenerator?.startTone(ToneGenerator.TONE_PROP_BEEP, 200) } catch (_: Exception) {}
         } else {
             isCorrect = false
             feedback = "Incorrect. Correct: ${currentWord.uzbekTranslation}"
-            try {
-                toneGenerator?.startTone(ToneGenerator.TONE_PROP_NACK, 250)
-            } catch (e: Exception) {}
+            try { toneGenerator?.startTone(ToneGenerator.TONE_PROP_NACK, 250) } catch (_: Exception) {}
         }
 
         coroutineScope.launch {
@@ -106,18 +142,21 @@ fun VocabularyPracticeScreen(
     }
 
     Scaffold(
+        containerColor = Color.Transparent,
         topBar = {
-            TopAppBar(
-                title = { Text("Typing Practice: B$bookNumber • U$unitNumber") },
+            GlassTopAppBar(
+                title = {
+                    Text(
+                        "Typing Practice: B$bookNumber • U$unitNumber",
+                        color = TextPrimaryWhite,
+                        fontWeight = FontWeight.Bold
+                    )
+                },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back", tint = TextPrimaryWhite)
                     }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
-                )
+                }
             )
         }
     ) { padding ->
@@ -129,12 +168,14 @@ fun VocabularyPracticeScreen(
             contentAlignment = Alignment.Center
         ) {
             if (words.isEmpty()) {
-                CircularProgressIndicator()
+                CircularProgressIndicator(color = GlassCyanAccent)
             } else if (quizFinished) {
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(24.dp),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+                GlassCard(
+                    tier = GlassTier.TIER_2,
+                    cornerRadius = 24.dp,
+                    tintColor = GlassEmeraldFill,
+                    borderColor = GlassEmeraldBorder,
+                    modifier = Modifier.fillMaxWidth()
                 ) {
                     Column(
                         modifier = Modifier.padding(28.dp),
@@ -143,22 +184,25 @@ fun VocabularyPracticeScreen(
                         Text(
                             text = "Practice Completed! 🏆",
                             style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold),
+                            color = TextPrimaryWhite,
                             textAlign = TextAlign.Center
                         )
                         Spacer(modifier = Modifier.height(12.dp))
                         Text(
                             text = "Score: $score of ${words.size} words",
                             style = MaterialTheme.typography.titleLarge,
-                            color = MaterialTheme.colorScheme.primary,
+                            color = GlassEmeraldAccent,
                             fontWeight = FontWeight.Bold
                         )
                         Spacer(modifier = Modifier.height(24.dp))
-                        Button(
+                        GlassActionButton(
                             onClick = onBackClick,
-                            modifier = Modifier.fillMaxWidth().height(48.dp),
-                            shape = RoundedCornerShape(12.dp)
+                            tintColor = GlassCyanFill,
+                            borderColor = GlassCyanBorder,
+                            cornerRadius = 14.dp,
+                            modifier = Modifier.fillMaxWidth().height(48.dp)
                         ) {
-                            Text("Done")
+                            Text("Done", fontWeight = FontWeight.Bold)
                         }
                     }
                 }
@@ -168,36 +212,37 @@ fun VocabularyPracticeScreen(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    LinearProgressIndicator(
-                        progress = { (currentIndex + 1).toFloat() / words.size },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(8.dp)
-                            .clip(RoundedCornerShape(4.dp)),
-                        color = MaterialTheme.colorScheme.primary
+                    GlassLinearProgress(
+                        progress = (currentIndex + 1).toFloat() / words.size,
+                        modifier = Modifier.fillMaxWidth(),
+                        height = 8.dp
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = "Word ${currentIndex + 1} of ${words.size}",
                         style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.outline
+                        color = TextMetaTranslucent
                     )
 
                     Spacer(modifier = Modifier.height(24.dp))
 
-                    Card(
-                        modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(20.dp),
-                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f))
+                    GlassCard(
+                        tier = GlassTier.TIER_2,
+                        cornerRadius = 22.dp,
+                        tintColor = GlassCyanFill,
+                        borderColor = GlassCyanBorder,
+                        modifier = Modifier.fillMaxWidth()
                     ) {
                         Column(
-                            modifier = Modifier.padding(24.dp),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(24.dp),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             Text(
                                 "Type the Uzbek translation:",
                                 style = MaterialTheme.typography.labelMedium,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                                color = TextBodyTranslucent
                             )
                             Spacer(modifier = Modifier.height(8.dp))
                             Row(
@@ -207,20 +252,34 @@ fun VocabularyPracticeScreen(
                                 Text(
                                     text = currentWord.word,
                                     style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.ExtraBold),
-                                    color = MaterialTheme.colorScheme.primary
+                                    color = TextPrimaryWhite
                                 )
-                                Spacer(modifier = Modifier.width(8.dp))
-                                IconButton(onClick = { viewModel.speakWord(currentWord.word) }) {
-                                    Icon(Icons.Default.VolumeUp, contentDescription = "Pronounce", tint = MaterialTheme.colorScheme.primary)
-                                }
+                                Spacer(modifier = Modifier.width(10.dp))
+                                DualAudioButtons(
+                                    word = currentWord.word,
+                                    onSpeakUs = { viewModel.speakWordWithAccent(currentWord.word, false) },
+                                    onSpeakUk = { viewModel.speakWordWithAccent(currentWord.word, true) }
+                                )
                             }
 
-                            if (currentWord.phonetic.isNotBlank()) {
-                                Text(
-                                    text = currentWord.phonetic,
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    color = MaterialTheme.colorScheme.outline
-                                )
+                            if (currentWord.partOfSpeech.isNotBlank() || currentWord.phonetic.isNotBlank()) {
+                                Spacer(modifier = Modifier.height(8.dp))
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                ) {
+                                    PartOfSpeechBadge(
+                                        partOfSpeech = currentWord.partOfSpeech,
+                                        tagSuffix = "practice_${currentWord.id}"
+                                    )
+                                    if (currentWord.phonetic.isNotBlank()) {
+                                        Text(
+                                            text = currentWord.phonetic,
+                                            style = MaterialTheme.typography.bodyMedium,
+                                            color = TextMetaTranslucent
+                                        )
+                                    }
+                                }
                             }
                         }
                     }
@@ -237,35 +296,46 @@ fun VocabularyPracticeScreen(
                             .fillMaxWidth()
                             .testTag("typing_input"),
                         shape = RoundedCornerShape(14.dp),
+                        colors = glassTextFieldColors(),
                         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
                         keyboardActions = KeyboardActions(onDone = { submitAnswer() })
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    Button(
+                    GlassActionButton(
                         onClick = { submitAnswer() },
                         enabled = !isSubmitting && userInput.isNotBlank(),
+                        tintColor = GlassCyanFill,
+                        borderColor = GlassCyanBorder,
+                        cornerRadius = 14.dp,
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(50.dp)
-                            .testTag("submit_translation_btn"),
-                        shape = RoundedCornerShape(14.dp)
+                            .testTag("submit_translation_btn")
                     ) {
                         Icon(Icons.Default.Check, contentDescription = null)
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text("Check Answer")
+                        Text("Check Answer", fontWeight = FontWeight.Bold)
                     }
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    feedback?.let {
-                        Text(
-                            text = it,
-                            color = if (isCorrect) Color(0xFF10B981) else Color(0xFFEF4444),
-                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                            textAlign = TextAlign.Center
-                        )
+                    feedback?.let { msg ->
+                        Surface(
+                            shape = RoundedCornerShape(14.dp),
+                            color = if (isCorrect) GlassEmeraldFill else GlassRoseFill,
+                            border = BorderStroke(1.dp, if (isCorrect) GlassEmeraldBorder else GlassRoseBorder),
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text(
+                                text = msg,
+                                color = if (isCorrect) GlassEmeraldAccent else GlassRoseAccent,
+                                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                                textAlign = TextAlign.Center,
+                                modifier = Modifier.padding(14.dp)
+                            )
+                        }
                     }
                 }
             }

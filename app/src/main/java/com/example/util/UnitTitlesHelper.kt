@@ -37,12 +37,32 @@ object UnitTitlesHelper {
         "The Arctic Tundra", "The Coral Atoll", "The Highland Fortress", "The Midnight Sun", "The Final Odyssey"
     )
 
+    private val book5Titles = listOf(
+        "The Little Mice", "The Helpful Abbey", "The Bachelor's Lesson", "The Corrupt Administrator", "A Famous Accident",
+        "The Island", "Small World", "Becoming a Healer", "The Weaving Machine", "Life on the Farm",
+        "Beethoven's Gift", "Brothers", "The Old Hound", "Day Without Sight", "The Big Ship",
+        "The History of Parachutes", "\"I Didn't Do It!\"", "The Soldier's Decision", "Jane's Pride", "Microchips",
+        "The Twins", "The New Bioco", "How Comet Got His Tail", "The Resourceful Landlord", "The Man and the Monkey",
+        "Cosmo's Flight", "The First Organ Transplant", "The Lottery", "Jen's New Job", "The Demon's Bridge"
+    )
+
+    private val book6Titles = listOf(
+        "The North Star", "The Fossil Hunters", "Dressed to Excess", "The Butler's Bad Day", "A Bet",
+        "Amazing Komodo Dragons", "Greek Magical Papyri", "Watch Out!", "Dangerous Bites", "The Avalanche",
+        "The Lydian King", "The Butler", "The End of Smallpox", "The Coward's Lesson", "Epidemic in Zimbabwe",
+        "The Brute and the Billionaire", "The Tenacious Inventor", "The Nurse's Lesson", "Seizures Then and Now", "The Greedy Bee",
+        "The Mayor of Sherman", "The Editor's Choice", "The Ice House", "Preparing for the Future", "Hundred Plays",
+        "The Kidnapping", "The Earl of Shining", "The Lord and the Farmers", "The Shortcut", "The Mad Hatter"
+    )
+
     fun getTitle(book: Int, unit: Int): String {
         val list = when (book) {
             1 -> book1Titles
             2 -> book2Titles
             3 -> book3Titles
             4 -> book4Titles
+            5 -> book5Titles
+            6 -> book6Titles
             else -> book1Titles
         }
         val index = (unit - 1).coerceIn(0, list.lastIndex)

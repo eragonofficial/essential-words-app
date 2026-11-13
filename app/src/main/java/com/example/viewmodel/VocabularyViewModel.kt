@@ -6,27 +6,37 @@ import androidx.lifecycle.viewModelScope
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
+import com.example.data.dictionary.DynamicThesaurus
+import com.example.data.dictionary.GlobalDictionaryService
 import com.example.data.local.LeaderboardEntity
 import com.example.data.local.SearchHistoryEntity
 import com.example.data.local.UnitProgressEntity
 import com.example.data.local.WordEntity
 import com.example.data.repository.VocabularyRepository
+import com.example.util.AudioPronunciationPlayer
 import com.example.util.TextToSpeechHelper
 import com.example.worker.DailyReminderWorker
 import com.example.worker.SpacedRepetitionWorker
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.util.Locale
 import java.util.concurrent.TimeUnit
 
 class VocabularyViewModel(application: Application) : AndroidViewModel(application) {
     private val repository = VocabularyRepository(application)
     private val ttsHelper = TextToSpeechHelper(application)
+    private val audioPlayer = AudioPronunciationPlayer(application)
+    private val dictionaryService = GlobalDictionaryService()
 
     init {
         viewModelScope.launch {
@@ -90,8 +100,26 @@ class VocabularyViewModel(application: Application) : AndroidViewModel(applicati
     val bookmarkedWords: StateFlow<List<WordEntity>> = repository.getBookmarkedWords()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
+    val allWords: StateFlow<List<WordEntity>> = repository.getAllWords()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
+    val dueWords: StateFlow<List<WordEntity>> = repository.getDueWords()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
+    val dueWordsCount: StateFlow<Int> = repository.getDueWordsCount()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 0)
+
     private val _searchResults = MutableStateFlow<List<WordEntity>>(emptyList())
     val searchResults: StateFlow<List<WordEntity>> = _searchResults.asStateFlow()
+
+    private val _searchLanguage = MutableStateFlow(VocabularyRepository.LocalBookSearchLanguage.ENGLISH)
+    val searchLanguage: StateFlow<VocabularyRepository.LocalBookSearchLanguage> = _searchLanguage.asStateFlow()
+
+    private var lastSearchQuery: String = ""
+    private var searchJob: Job? = null
+
+    private val _dynamicThesaurusMap = MutableStateFlow<Map<String, DynamicThesaurus>>(emptyMap())
+    val dynamicThesaurusMap: StateFlow<Map<String, DynamicThesaurus>> = _dynamicThesaurusMap.asStateFlow()
 
     private val _currentUnitWords = MutableStateFlow<List<WordEntity>>(emptyList())
     val currentUnitWords: StateFlow<List<WordEntity>> = _currentUnitWords.asStateFlow()
@@ -147,13 +175,68 @@ class VocabularyViewModel(application: Application) : AndroidViewModel(applicati
         return repository.getWordById(wordId)
     }
 
-    fun search(query: String) {
+    fun setSearchLanguage(language: VocabularyRepository.LocalBookSearchLanguage) {
+        _searchLanguage.value = language
+        if (lastSearchQuery.isNotBlank()) {
+            search(lastSearchQuery, language)
+        }
+    }
+
+    fun search(
+        query: String,
+        language: VocabularyRepository.LocalBookSearchLanguage = _searchLanguage.value
+    ) {
+        lastSearchQuery = query
+        searchJob?.cancel()
+        if (query.isBlank()) {
+            _searchResults.value = emptyList()
+            return
+        }
+        searchJob = viewModelScope.launch {
+            repository.searchWords(query, language).collect { results ->
+                _searchResults.value = results
+            }
+        }
+    }
+
+    fun ensureDynamicThesaurus(word: String) {
+        val key = word.trim().lowercase(Locale.ROOT)
+        if (key.isBlank()) return
+        val existing = _dynamicThesaurusMap.value[key]
+        if (existing != null && (existing.isLoading || existing.synonyms.isNotEmpty() || existing.antonyms.isNotEmpty())) {
+            return
+        }
+        if (existing != null && !existing.isLoading) {
+            return
+        }
+
+        _dynamicThesaurusMap.update { it + (key to DynamicThesaurus(isLoading = true)) }
         viewModelScope.launch {
-            if (query.isBlank()) {
-                _searchResults.value = emptyList()
-            } else {
-                repository.searchWords(query).collect { results ->
-                    _searchResults.value = results
+            try {
+                val (syns, ants) = coroutineScope {
+                    val synDef = async { dictionaryService.fetchDatamuseSynonyms(key) }
+                    val antDef = async { dictionaryService.fetchDatamuseAntonyms(key) }
+                    val dmSyns = synDef.await()
+                    val dmAnts = antDef.await()
+                    if (dmSyns.isEmpty() || dmAnts.isEmpty()) {
+                        val freeDict = dictionaryService.fetchFreeDictionary(key)
+                        val mergedSyns = (dmSyns + (freeDict?.synonyms ?: emptyList()))
+                            .distinctBy { it.lowercase(Locale.ROOT) }
+                            .take(12)
+                        val mergedAnts = (dmAnts + (freeDict?.antonyms ?: emptyList()))
+                            .distinctBy { it.lowercase(Locale.ROOT) }
+                            .take(12)
+                        mergedSyns to mergedAnts
+                    } else {
+                        dmSyns.take(12) to dmAnts.take(12)
+                    }
+                }
+                _dynamicThesaurusMap.update {
+                    it + (key to DynamicThesaurus(synonyms = syns, antonyms = ants, isLoading = false))
+                }
+            } catch (_: Exception) {
+                _dynamicThesaurusMap.update {
+                    it + (key to DynamicThesaurus(isLoading = false))
                 }
             }
         }
@@ -187,7 +270,18 @@ class VocabularyViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     fun speakWord(word: String) {
-        ttsHelper.speak(word, _isUkAccent.value)
+        speakWordWithAccent(word, _isUkAccent.value)
+    }
+
+    fun speakWordWithAccent(word: String, isUk: Boolean) {
+        val clean = word.trim()
+        if (clean.isBlank()) return
+        _isUkAccent.value = isUk
+        if (isUk) {
+            audioPlayer.playUk(clean, null)
+        } else {
+            audioPlayer.playUs(clean, null)
+        }
     }
 
     fun generateAiQuizForWord(word: String, definition: String) {
@@ -247,8 +341,15 @@ class VocabularyViewModel(application: Application) : AndroidViewModel(applicati
         return repository.getWordsForBookList(bookNumber)
     }
 
+    fun reviewWord(wordId: Long, grade: VocabularyRepository.ReviewGrade) {
+        viewModelScope.launch {
+            repository.reviewWord(wordId, grade)
+        }
+    }
+
     override fun onCleared() {
         super.onCleared()
+        audioPlayer.release()
         ttsHelper.shutdown()
     }
 }

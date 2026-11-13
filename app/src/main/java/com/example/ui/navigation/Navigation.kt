@@ -2,6 +2,7 @@ package com.example.ui.navigation
 
 sealed class Screen(val route: String) {
     object Auth : Screen("auth")
+    object Home : Screen("home")
     object BookList : Screen("book_list")
     object UnitList : Screen("unit_list/{bookNumber}") {
         fun createRoute(bookNumber: Int) = "unit_list/$bookNumber"
@@ -13,6 +14,7 @@ sealed class Screen(val route: String) {
         fun createRoute(bookNumber: Int, unitNumber: Int) = "quiz/$bookNumber/$unitNumber"
     }
     object Search : Screen("search")
+    object BookSearch : Screen("book_search")
     object SynonymsAntonyms : Screen("synonyms_antonyms")
     object Profile : Screen("profile")
     object Dashboard : Screen("dashboard")
@@ -24,4 +26,6 @@ sealed class Screen(val route: String) {
     object WordDetail : Screen("word_detail/{wordId}") {
         fun createRoute(wordId: Long) = "word_detail/$wordId"
     }
+    object SpacedRepetitionReview : Screen("spaced_repetition")
+    object Review : Screen("review")
 }

@@ -11,6 +11,7 @@ data class WordEntity(
     val unitNumber: Int,
     val word: String,
     val phonetic: String,
+    val partOfSpeech: String = "",
     val englishDefinition: String = "",
     val englishExample: String = "",
     val definition: String = "",
@@ -23,7 +24,11 @@ data class WordEntity(
     val antonyms: String = "",
     val isBookmarked: Boolean = false,
     val isLearned: Boolean = false,
-    val learnedTimestamp: Long = 0L
+    val learnedTimestamp: Long = 0L,
+    val nextReviewTimestamp: Long = 0L,
+    val repetitionIntervalDays: Int = 0,
+    val repetitionCount: Int = 0,
+    val easeFactor: Float = 2.5f
 )
 
 @Entity(tableName = "unit_progress")

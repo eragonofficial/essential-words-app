@@ -3,23 +3,43 @@ package com.example.ui.screens
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.LockOpen
+import androidx.compose.material.icons.filled.Quiz
+import androidx.compose.material.icons.filled.School
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
@@ -29,10 +49,43 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.data.local.UnitProgressEntity
+import com.example.ui.components.GlassActionButton
+import com.example.ui.components.GlassCard
+import com.example.ui.components.GlassLinearProgress
+import com.example.ui.components.GlassPill
+import com.example.ui.components.GlassTier
+import com.example.ui.components.GlassTopAppBar
+import com.example.ui.theme.GlassAmberAccent
+import com.example.ui.theme.GlassAmberBorder
+import com.example.ui.theme.GlassAmberFill
+import com.example.ui.theme.GlassCyanAccent
+import com.example.ui.theme.GlassCyanBorder
+import com.example.ui.theme.GlassCyanFill
+import com.example.ui.theme.GlassEmeraldAccent
+import com.example.ui.theme.GlassEmeraldBorder
+import com.example.ui.theme.GlassEmeraldFill
+import com.example.ui.theme.GlassIndigoBorder
+import com.example.ui.theme.GlassIndigoFill
+import com.example.ui.theme.GlassPinkAccent
+import com.example.ui.theme.GlassPinkBorder
+import com.example.ui.theme.GlassPinkFill
+import com.example.ui.theme.GlassRoseAccent
+import com.example.ui.theme.GlassRoseBorder
+import com.example.ui.theme.GlassRoseFill
+import com.example.ui.theme.GlassRoyalBlueBorder
+import com.example.ui.theme.GlassRoyalBlueFill
+import com.example.ui.theme.GlassTier1Border
+import com.example.ui.theme.GlassTier1Fill
+import com.example.ui.theme.GlassTier3Border
+import com.example.ui.theme.GlassTier3Fill
+import com.example.ui.theme.GlassVioletBorder
+import com.example.ui.theme.GlassVioletFill
+import com.example.ui.theme.TextBodyTranslucent
+import com.example.ui.theme.TextMetaTranslucent
+import com.example.ui.theme.TextPrimaryWhite
 import com.example.util.UnitTitlesHelper
 import com.example.viewmodel.VocabularyViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UnitListScreen(
     bookNumber: Int,
@@ -50,7 +103,6 @@ fun UnitListScreen(
         .filter { it.bookNumber == bookNumber }
         .sortedBy { it.unitNumber }
 
-    // Fallback UI state: automatically pre-populates all 30 units so screen never turns blank
     val displayUnits = if (bookProgress.isNotEmpty()) {
         bookProgress
     } else {
@@ -60,56 +112,56 @@ fun UnitListScreen(
                 bookNumber = bookNumber,
                 unitNumber = uNum,
                 unitTitle = UnitTitlesHelper.getTitle(bookNumber, uNum),
-                isUnlocked = true, // All units unlocked by default
+                isUnlocked = true,
                 isPassed = false,
                 score = 0
             )
         }
     }
 
-    // Preset energetic, vibrant gradient palettes for unlocked units
-    val gradientPalettes = listOf(
-        listOf(Color(0xFF2563EB), Color(0xFF06B6D4)), // Cobalt to Cyan
-        listOf(Color(0xFF7C3AED), Color(0xFFC084FC)), // Violet to Light Purple
-        listOf(Color(0xFF059669), Color(0xFF10B981)), // Emerald to Mint
-        listOf(Color(0xFFEA580C), Color(0xFFFBBF24)), // Orange to Amber
-        listOf(Color(0xFFDB2777), Color(0xFFF472B6)), // Pink to Rose
-        listOf(Color(0xFF4F46E5), Color(0xFF818CF8))  // Indigo to Lavender
+    val glassPalettes = listOf(
+        Pair(GlassRoyalBlueFill, GlassRoyalBlueBorder),
+        Pair(GlassVioletFill, GlassVioletBorder),
+        Pair(GlassCyanFill, GlassCyanBorder),
+        Pair(GlassAmberFill, GlassAmberBorder),
+        Pair(GlassPinkFill, GlassPinkBorder),
+        Pair(GlassIndigoFill, GlassIndigoBorder)
     )
 
     Scaffold(
+        containerColor = Color.Transparent,
         topBar = {
-            TopAppBar(
+            GlassTopAppBar(
                 title = {
                     Column {
                         Text(
                             "Essential English Words $bookNumber",
-                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
+                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                            color = TextPrimaryWhite
                         )
                         Text(
                             "Select a Unit to Study (30 Units)",
                             style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.8f)
+                            color = TextMetaTranslucent
                         )
                     }
                 },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back", tint = TextPrimaryWhite)
                     }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
-                )
+                }
             )
         }
     ) { padding ->
         Column(modifier = Modifier.fillMaxSize().padding(padding)) {
             if (progressList.isEmpty()) {
-                LinearProgressIndicator(
-                    modifier = Modifier.fillMaxWidth().height(3.dp),
-                    color = MaterialTheme.colorScheme.primary
+                GlassLinearProgress(
+                    progress = 0.6f,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 4.dp),
+                    height = 4.dp
                 )
             }
             LazyColumn(
@@ -121,294 +173,292 @@ fun UnitListScreen(
                 items(displayUnits, key = { "${it.bookNumber}_${it.unitNumber}" }) { progress ->
                     val unitNum = progress.unitNumber
                     val isUnlocked = progress.isUnlocked
-                val isPassed = progress.isPassed
-                val title = if (progress.unitTitle.isNotBlank()) {
-                    progress.unitTitle
-                } else {
-                    UnitTitlesHelper.getTitle(bookNumber, unitNum)
-                }
+                    val isPassed = progress.isPassed
+                    val title = if (progress.unitTitle.isNotBlank()) {
+                        progress.unitTitle
+                    } else {
+                        UnitTitlesHelper.getTitle(bookNumber, unitNum)
+                    }
 
-                // Interactive bounce animation state
-                var isPressed by remember { mutableStateOf(false) }
-                val animatedScale by animateFloatAsState(
-                    targetValue = if (isPressed) 0.96f else 1f,
-                    animationSpec = spring(
-                        dampingRatio = Spring.DampingRatioMediumBouncy,
-                        stiffness = Spring.StiffnessLow
-                    ),
-                    label = "unitCardBounce"
-                )
+                    var isPressed by remember { mutableStateOf(false) }
+                    val animatedScale by animateFloatAsState(
+                        targetValue = if (isPressed) 0.97f else 1f,
+                        animationSpec = spring(
+                            dampingRatio = Spring.DampingRatioMediumBouncy,
+                            stiffness = Spring.StiffnessLow
+                        ),
+                        label = "unitCardBounce"
+                    )
 
-                val gradient = if (isPassed) {
-                    listOf(Color(0xFF0D9488), Color(0xFF10B981)) // Emerald Passed Gradient
-                } else if (isUnlocked) {
-                    gradientPalettes[(unitNum - 1) % gradientPalettes.size]
-                } else {
-                    listOf(Color(0xFFE2E8F0), Color(0xFFCBD5E1)) // Slate Locked Gradient
-                }
+                    val (tintFill, tintBorder) = when {
+                        isPassed -> GlassEmeraldFill to GlassEmeraldBorder
+                        isUnlocked -> glassPalettes[(unitNum - 1) % glassPalettes.size]
+                        else -> GlassTier1Fill to GlassTier1Border
+                    }
 
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .graphicsLayer {
-                            scaleX = animatedScale
-                            scaleY = animatedScale
-                        }
-                        .shadow(
-                            elevation = if (isUnlocked) 6.dp else 1.dp,
-                            shape = RoundedCornerShape(20.dp),
-                            clip = false
-                        )
-                        .clip(RoundedCornerShape(20.dp))
-                        .background(Brush.linearGradient(gradient))
-                        .pointerInput(isUnlocked) {
-                            if (isUnlocked) {
-                                detectTapGestures(
-                                    onPress = {
-                                        isPressed = true
-                                        tryAwaitRelease()
-                                        isPressed = false
-                                    },
-                                    onTap = {
-                                        onUnitClick(bookNumber, unitNum)
-                                    }
-                                )
-                            }
-                        }
-                        .testTag("unit_card_${bookNumber}_$unitNum")
-                ) {
-                    Column(
+                    GlassCard(
+                        tier = if (isUnlocked) GlassTier.TIER_2 else GlassTier.TIER_1,
+                        cornerRadius = 20.dp,
+                        tintColor = tintFill,
+                        borderColor = tintBorder,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(18.dp)
-                    ) {
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            // Badge with Unit Number
-                            Surface(
-                                shape = RoundedCornerShape(12.dp),
-                                color = if (isUnlocked) Color.White.copy(alpha = 0.25f) else Color.White.copy(alpha = 0.6f)
-                            ) {
-                                Text(
-                                    text = "UNIT $unitNum",
-                                    style = MaterialTheme.typography.labelMedium.copy(
-                                        fontWeight = FontWeight.ExtraBold,
-                                        letterSpacing = 1.sp
-                                    ),
-                                    color = if (isUnlocked) Color.White else Color(0xFF475569),
-                                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
-                                )
+                            .graphicsLayer {
+                                scaleX = animatedScale
+                                scaleY = animatedScale
                             }
-
-                            // Status Badge
+                            .pointerInput(isUnlocked) {
+                                if (isUnlocked) {
+                                    detectTapGestures(
+                                        onPress = {
+                                            isPressed = true
+                                            tryAwaitRelease()
+                                            isPressed = false
+                                        },
+                                        onTap = {
+                                            onUnitClick(bookNumber, unitNum)
+                                        }
+                                    )
+                                }
+                            }
+                            .testTag("unit_card_${bookNumber}_$unitNum")
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(18.dp)
+                        ) {
                             Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(6.dp)
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
                             ) {
-                                when {
-                                    isPassed -> {
-                                        Surface(
-                                            shape = CircleShape,
-                                            color = Color(0xFFFBBF24)
-                                        ) {
-                                            Row(
-                                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
-                                                verticalAlignment = Alignment.CenterVertically
+                                GlassPill(
+                                    tintColor = GlassTier3Fill,
+                                    borderColor = GlassTier3Border,
+                                    shape = RoundedCornerShape(12.dp)
+                                ) {
+                                    Text(
+                                        text = "UNIT $unitNum",
+                                        style = MaterialTheme.typography.labelMedium.copy(
+                                            fontWeight = FontWeight.ExtraBold,
+                                            letterSpacing = 1.sp
+                                        ),
+                                        color = if (isUnlocked) TextPrimaryWhite else TextMetaTranslucent,
+                                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
+                                    )
+                                }
+
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(6.dp)
+                                ) {
+                                    when {
+                                        isPassed -> {
+                                            GlassPill(
+                                                shape = CircleShape,
+                                                tintColor = GlassAmberFill,
+                                                borderColor = GlassAmberBorder
                                             ) {
-                                                Icon(
-                                                    Icons.Default.Star,
-                                                    contentDescription = "Passed",
-                                                    tint = Color(0xFF78350F),
-                                                    modifier = Modifier.size(14.dp)
-                                                )
-                                                Spacer(modifier = Modifier.width(4.dp))
-                                                Text(
-                                                    "Passed (${progress.score}/10)",
-                                                    style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
-                                                    color = Color(0xFF78350F)
-                                                )
+                                                Row(
+                                                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
+                                                    verticalAlignment = Alignment.CenterVertically
+                                                ) {
+                                                    Icon(
+                                                        Icons.Default.Star,
+                                                        contentDescription = "Passed",
+                                                        tint = GlassAmberAccent,
+                                                        modifier = Modifier.size(14.dp)
+                                                    )
+                                                    Spacer(modifier = Modifier.width(4.dp))
+                                                    Text(
+                                                        "Passed (${progress.score}/10)",
+                                                        style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
+                                                        color = GlassAmberAccent
+                                                    )
+                                                }
                                             }
                                         }
-                                    }
-                                    isUnlocked -> {
-                                        Surface(
-                                            shape = CircleShape,
-                                            color = Color(0xFF10B981)
-                                        ) {
-                                            Row(
-                                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
-                                                verticalAlignment = Alignment.CenterVertically
+                                        isUnlocked -> {
+                                            GlassPill(
+                                                shape = CircleShape,
+                                                tintColor = GlassEmeraldFill,
+                                                borderColor = GlassEmeraldBorder
                                             ) {
-                                                Icon(
-                                                    Icons.Default.LockOpen,
-                                                    contentDescription = "Unlocked",
-                                                    tint = Color.White,
-                                                    modifier = Modifier.size(14.dp)
-                                                )
-                                                Spacer(modifier = Modifier.width(4.dp))
-                                                Text(
-                                                    "Unlocked",
-                                                    style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
-                                                    color = Color.White
-                                                )
+                                                Row(
+                                                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
+                                                    verticalAlignment = Alignment.CenterVertically
+                                                ) {
+                                                    Icon(
+                                                        Icons.Default.LockOpen,
+                                                        contentDescription = "Unlocked",
+                                                        tint = GlassEmeraldAccent,
+                                                        modifier = Modifier.size(14.dp)
+                                                    )
+                                                    Spacer(modifier = Modifier.width(4.dp))
+                                                    Text(
+                                                        "Unlocked",
+                                                        style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
+                                                        color = GlassEmeraldAccent
+                                                    )
+                                                }
                                             }
                                         }
-                                    }
-                                    else -> {
-                                        Surface(
-                                            shape = CircleShape,
-                                            color = Color(0xFF94A3B8)
-                                        ) {
-                                            Row(
-                                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
-                                                verticalAlignment = Alignment.CenterVertically
+                                        else -> {
+                                            GlassPill(
+                                                shape = CircleShape,
+                                                tintColor = GlassTier3Fill,
+                                                borderColor = GlassTier3Border
                                             ) {
-                                                Icon(
-                                                    Icons.Default.Lock,
-                                                    contentDescription = "Locked",
-                                                    tint = Color.White,
-                                                    modifier = Modifier.size(14.dp)
-                                                )
-                                                Spacer(modifier = Modifier.width(4.dp))
-                                                Text(
-                                                    "Locked",
-                                                    style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
-                                                    color = Color.White
-                                                )
+                                                Row(
+                                                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
+                                                    verticalAlignment = Alignment.CenterVertically
+                                                ) {
+                                                    Icon(
+                                                        Icons.Default.Lock,
+                                                        contentDescription = "Locked",
+                                                        tint = TextMetaTranslucent,
+                                                        modifier = Modifier.size(14.dp)
+                                                    )
+                                                    Spacer(modifier = Modifier.width(4.dp))
+                                                    Text(
+                                                        "Locked",
+                                                        style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
+                                                        color = TextMetaTranslucent
+                                                    )
+                                                }
                                             }
                                         }
                                     }
                                 }
                             }
-                        }
 
-                        Spacer(modifier = Modifier.height(10.dp))
+                            Spacer(modifier = Modifier.height(10.dp))
 
-                        // Topic Title prominently displayed
-                        Text(
-                            text = title,
-                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                            color = if (isUnlocked) Color.White else Color(0xFF334155),
-                            maxLines = 2,
-                            overflow = TextOverflow.Ellipsis
-                        )
-
-                        Spacer(modifier = Modifier.height(12.dp))
-
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
                             Text(
-                                text = if (isUnlocked) "20 Essential Words" else "Complete previous unit to unlock",
-                                style = MaterialTheme.typography.bodySmall,
-                                color = if (isUnlocked) Color.White.copy(alpha = 0.85f) else Color(0xFF64748B)
+                                text = title,
+                                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                                color = if (isUnlocked) TextPrimaryWhite else TextMetaTranslucent,
+                                maxLines = 2,
+                                overflow = TextOverflow.Ellipsis
                             )
 
-                            if (isUnlocked) {
-                                Button(
-                                    onClick = { onQuizClick(bookNumber, unitNum) },
-                                    shape = RoundedCornerShape(12.dp),
-                                    colors = ButtonDefaults.buttonColors(
-                                        containerColor = Color.White,
-                                        contentColor = Color(0xFF1E293B)
-                                    ),
-                                    contentPadding = PaddingValues(horizontal = 14.dp, vertical = 6.dp),
-                                    modifier = Modifier
-                                        .height(34.dp)
-                                        .testTag("quiz_btn_${bookNumber}_$unitNum")
-                                ) {
-                                    Icon(
-                                        Icons.Default.Quiz,
-                                        contentDescription = null,
-                                        modifier = Modifier.size(16.dp),
-                                        tint = Color(0xFF2563EB)
-                                    )
-                                    Spacer(modifier = Modifier.width(6.dp))
-                                    Text(
-                                        "Quiz",
-                                        style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold)
-                                    )
+                            Spacer(modifier = Modifier.height(12.dp))
+
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text(
+                                    text = if (isUnlocked) "20 Essential Words" else "Complete previous unit to unlock",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = if (isUnlocked) TextBodyTranslucent else TextMetaTranslucent
+                                )
+
+                                if (isUnlocked) {
+                                    GlassActionButton(
+                                        onClick = { onQuizClick(bookNumber, unitNum) },
+                                        tintColor = GlassTier3Fill,
+                                        borderColor = GlassCyanBorder,
+                                        cornerRadius = 12.dp,
+                                        contentPadding = PaddingValues(horizontal = 14.dp, vertical = 6.dp),
+                                        modifier = Modifier
+                                            .height(38.dp)
+                                            .testTag("quiz_btn_${bookNumber}_$unitNum")
+                                    ) {
+                                        Icon(
+                                            Icons.Default.Quiz,
+                                            contentDescription = null,
+                                            modifier = Modifier.size(16.dp),
+                                            tint = GlassCyanAccent
+                                        )
+                                        Spacer(modifier = Modifier.width(6.dp))
+                                        Text(
+                                            "Quiz",
+                                            style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
+                                            color = TextPrimaryWhite
+                                        )
+                                    }
                                 }
                             }
                         }
                     }
                 }
-            }
 
-            // Final Assessment / Comprehensive Exam
-            item {
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clip(RoundedCornerShape(20.dp))
-                        .testTag("final_exam_card"),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
-                ) {
-                    Column(
+                // Final Assessment / Comprehensive Exam (Rose/Amber Warning Glass Card)
+                item {
+                    GlassCard(
+                        tier = GlassTier.TIER_2,
+                        cornerRadius = 20.dp,
+                        tintColor = GlassRoseFill,
+                        borderColor = GlassRoseBorder,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(20.dp)
+                            .testTag("final_exam_card")
                     ) {
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Surface(
-                                shape = RoundedCornerShape(12.dp),
-                                color = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.2f)
-                            ) {
-                                Text(
-                                    "FINAL ASSESSMENT",
-                                    style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.ExtraBold),
-                                    color = MaterialTheme.colorScheme.onTertiaryContainer,
-                                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
-                                )
-                            }
-                            Icon(
-                                Icons.Default.School,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.onTertiaryContainer
-                            )
-                        }
-                        Spacer(modifier = Modifier.height(10.dp))
-                        Text(
-                            "Book $bookNumber Comprehensive Final Exam",
-                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                            color = MaterialTheme.colorScheme.onTertiaryContainer
-                        )
-                        Spacer(modifier = Modifier.height(4.dp))
-                        Text(
-                            "Once you enter the Final Exam, all units of Book $bookNumber automatically lock to prevent cheating. Exiting the app invalidates the attempt.",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha = 0.85f)
-                        )
-                        Spacer(modifier = Modifier.height(16.dp))
-                        Button(
-                            onClick = {
-                                viewModel.enterFinalExam(bookNumber)
-                                onQuizClick(bookNumber, 1)
-                            },
+                        Column(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .height(46.dp)
-                                .testTag("start_final_exam_btn"),
-                            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.tertiary)
+                                .padding(20.dp)
                         ) {
-                            Icon(Icons.Default.Lock, contentDescription = null, modifier = Modifier.size(16.dp))
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Text("Enter Final Exam (Auto-lock units)")
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                GlassPill(
+                                    tintColor = GlassRoseFill,
+                                    borderColor = GlassRoseBorder,
+                                    shape = RoundedCornerShape(12.dp)
+                                ) {
+                                    Text(
+                                        "FINAL ASSESSMENT",
+                                        style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.ExtraBold),
+                                        color = GlassRoseAccent,
+                                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
+                                    )
+                                }
+                                Icon(
+                                    Icons.Default.School,
+                                    contentDescription = null,
+                                    tint = GlassRoseAccent
+                                )
+                            }
+                            Spacer(modifier = Modifier.height(10.dp))
+                            Text(
+                                "Book $bookNumber Comprehensive Final Exam",
+                                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                                color = TextPrimaryWhite
+                            )
+                            Spacer(modifier = Modifier.height(4.dp))
+                            Text(
+                                "Once you enter the Final Exam, all units of Book $bookNumber automatically lock to prevent cheating. Exiting the app invalidates the attempt.",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = TextBodyTranslucent
+                            )
+                            Spacer(modifier = Modifier.height(16.dp))
+                            GlassActionButton(
+                                onClick = {
+                                    viewModel.enterFinalExam(bookNumber)
+                                    onQuizClick(bookNumber, 1)
+                                },
+                                tintColor = GlassRoseFill,
+                                borderColor = GlassRoseBorder,
+                                cornerRadius = 14.dp,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(48.dp)
+                                    .testTag("start_final_exam_btn")
+                            ) {
+                                Icon(Icons.Default.Lock, contentDescription = null, modifier = Modifier.size(16.dp), tint = GlassRoseAccent)
+                                Spacer(modifier = Modifier.width(8.dp))
+                                Text("Enter Final Exam (Auto-lock units)", fontWeight = FontWeight.Bold)
+                            }
                         }
                     }
                 }
             }
         }
     }
-}
 }

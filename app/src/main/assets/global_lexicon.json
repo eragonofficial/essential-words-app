@@ -1,0 +1,2568 @@
+[
+  {
+    "word": "serendipity",
+    "translation": "baxtiyorona tasodif, kutilmagan omad",
+    "phonetic": "/ˌsɛr.ənˈdɪp.ɪ.ti/",
+    "partOfSpeech": "noun",
+    "definition": "The occurrence of finding valuable or pleasant things by chance.",
+    "example": "Meeting her at the conference was pure serendipity.",
+    "synonyms": [
+      "fortuity",
+      "providence",
+      "luck"
+    ],
+    "antonyms": [
+      "misfortune",
+      "calamity"
+    ]
+  },
+  {
+    "word": "ubiquitous",
+    "translation": "hamma joyda mavjud, keng tarqalgan",
+    "phonetic": "/juːˈbɪk.wɪ.təs/",
+    "partOfSpeech": "adjective",
+    "definition": "Present, appearing, or found everywhere.",
+    "example": "Smartphones have become ubiquitous in modern society.",
+    "synonyms": [
+      "omnipresent",
+      "pervasive",
+      "universal"
+    ],
+    "antonyms": [
+      "rare",
+      "scarce"
+    ]
+  },
+  {
+    "word": "algorithm",
+    "translation": "algoritm, hisoblash tartibi",
+    "phonetic": "/ˈæl.ɡə.rɪ.ðəm/",
+    "partOfSpeech": "noun",
+    "definition": "A step-by-step procedure or set of rules for solving a problem or performing a computation.",
+    "example": "The search engine uses a ranking algorithm.",
+    "synonyms": [
+      "procedure",
+      "formula",
+      "protocol"
+    ],
+    "antonyms": [
+      "randomness",
+      "chaos"
+    ]
+  },
+  {
+    "word": "ephemeral",
+    "translation": "o'tkinchi, qisqa muddatli, muvaqqat",
+    "phonetic": "/ɪˈfɛm.ər.əl/",
+    "partOfSpeech": "adjective",
+    "definition": "Lasting for a very short time.",
+    "example": "Social media trends are often ephemeral.",
+    "synonyms": [
+      "transient",
+      "fleeting",
+      "brief"
+    ],
+    "antonyms": [
+      "permanent",
+      "eternal"
+    ]
+  },
+  {
+    "word": "resilient",
+    "translation": "chidamli, matonatli, tez tiklanuvchan",
+    "phonetic": "/rɪˈzɪl.jənt/",
+    "partOfSpeech": "adjective",
+    "definition": "Able to withstand or recover quickly from difficult conditions.",
+    "example": "Children are often remarkably resilient.",
+    "synonyms": [
+      "tough",
+      "adaptable",
+      "hardy"
+    ],
+    "antonyms": [
+      "fragile",
+      "vulnerable"
+    ]
+  },
+  {
+    "word": "eloquent",
+    "translation": "notiq, ravon va ta'sirli so'zlovchi",
+    "phonetic": "/ˈɛl.ə.kwənt/",
+    "partOfSpeech": "adjective",
+    "definition": "Fluent or persuasive in speaking or writing.",
+    "example": "She gave an eloquent speech about education.",
+    "synonyms": [
+      "articulate",
+      "expressive",
+      "fluent"
+    ],
+    "antonyms": [
+      "inarticulate",
+      "hesitant"
+    ]
+  },
+  {
+    "word": "pragmatic",
+    "translation": "amaliy, hayotiy, pragmatik",
+    "phonetic": "/præɡˈmæt.ɪk/",
+    "partOfSpeech": "adjective",
+    "definition": "Dealing with things sensibly and realistically based on practical considerations.",
+    "example": "We need a pragmatic approach to solve this budget issue.",
+    "synonyms": [
+      "practical",
+      "realistic",
+      "sensible"
+    ],
+    "antonyms": [
+      "idealistic",
+      "impractical"
+    ]
+  },
+  {
+    "word": "catalyst",
+    "translation": "katalizator, turtki beruvchi omil",
+    "phonetic": "/ˈkæt.əl.ɪst/",
+    "partOfSpeech": "noun",
+    "definition": "A person or thing that precipitates an event or change.",
+    "example": "The invention of the internet was a catalyst for global communication.",
+    "synonyms": [
+      "stimulus",
+      "spark",
+      "impetus"
+    ],
+    "antonyms": [
+      "deterrent",
+      "hindrance"
+    ]
+  },
+  {
+    "word": "paradigm",
+    "translation": "namuna, model, paradigma",
+    "phonetic": "/ˈpær.ə.daɪm/",
+    "partOfSpeech": "noun",
+    "definition": "A typical example, pattern, or model of something.",
+    "example": "Remote work created a new paradigm in corporate culture.",
+    "synonyms": [
+      "model",
+      "pattern",
+      "framework"
+    ],
+    "antonyms": [
+      "anomaly",
+      "exception"
+    ]
+  },
+  {
+    "word": "empathy",
+    "translation": "hamdardlik, o'zgalar his-tuyg'usini tushunish",
+    "phonetic": "/ˈɛm.pə.θi/",
+    "partOfSpeech": "noun",
+    "definition": "The ability to understand and share the feelings of another.",
+    "example": "Good leaders show genuine empathy toward their team.",
+    "synonyms": [
+      "compassion",
+      "understanding",
+      "sympathy"
+    ],
+    "antonyms": [
+      "apathy",
+      "indifference"
+    ]
+  },
+  {
+    "word": "sustainability",
+    "translation": "barqarorlik, ekologik muvozanat",
+    "phonetic": "/səˌsteɪ.nəˈbɪl.ə.ti/",
+    "partOfSpeech": "noun",
+    "definition": "The ability to be maintained at a certain rate or level without depleting resources.",
+    "example": "Solar energy is essential for long-term sustainability.",
+    "synonyms": [
+      "durability",
+      "viability",
+      "continuity"
+    ],
+    "antonyms": [
+      "depletion",
+      "exhaustion"
+    ]
+  },
+  {
+    "word": "innovation",
+    "translation": "yangilik, innovatsiya, ixtiro",
+    "phonetic": "/ˌɪn.əˈveɪ.ʃən/",
+    "partOfSpeech": "noun",
+    "definition": "A new method, idea, or product.",
+    "example": "Technological innovation drives economic growth.",
+    "synonyms": [
+      "novelty",
+      "invention",
+      "modernization"
+    ],
+    "antonyms": [
+      "stagnation",
+      "tradition"
+    ]
+  },
+  {
+    "word": "ambiguous",
+    "translation": "noaniq, ikki ma'noli, mavhum",
+    "phonetic": "/æmˈbɪɡ.ju.əs/",
+    "partOfSpeech": "adjective",
+    "definition": "Open to more than one interpretation; not having one obvious meaning.",
+    "example": "The contract contained several ambiguous clauses.",
+    "synonyms": [
+      "unclear",
+      "vague",
+      "equivocal"
+    ],
+    "antonyms": [
+      "clear",
+      "explicit"
+    ]
+  },
+  {
+    "word": "benevolent",
+    "translation": "xayrixoh, mehribon, saxiy",
+    "phonetic": "/bəˈnɛv.ə.lənt/",
+    "partOfSpeech": "adjective",
+    "definition": "Well meaning and kindly.",
+    "example": "A benevolent donor funded the new library.",
+    "synonyms": [
+      "kind",
+      "charitable",
+      "generous"
+    ],
+    "antonyms": [
+      "malevolent",
+      "cruel"
+    ]
+  },
+  {
+    "word": "candid",
+    "translation": "samimiy, ochiqko'ngil, ro'y-rost",
+    "phonetic": "/ˈkæn.dɪd/",
+    "partOfSpeech": "adjective",
+    "definition": "Truthful and straightforward; frank.",
+    "example": "She gave a candid assessment of the project.",
+    "synonyms": [
+      "frank",
+      "honest",
+      "forthright"
+    ],
+    "antonyms": [
+      "guarded",
+      "deceptive"
+    ]
+  },
+  {
+    "word": "diligent",
+    "translation": "tirishqoq, g'ayratli, mehnatsevar",
+    "phonetic": "/ˈdɪl.ɪ.dʒənt/",
+    "partOfSpeech": "adjective",
+    "definition": "Having or showing care and conscientiousness in one's work or duties.",
+    "example": "Diligent students review their notes every evening.",
+    "synonyms": [
+      "industrious",
+      "hardworking",
+      "attentive"
+    ],
+    "antonyms": [
+      "lazy",
+      "negligent"
+    ]
+  },
+  {
+    "word": "enigma",
+    "translation": "sir, jumboq, tushunarsiz hodisa",
+    "phonetic": "/ɪˈnɪɡ.mə/",
+    "partOfSpeech": "noun",
+    "definition": "A person or thing that is mysterious or difficult to understand.",
+    "example": "The disappearance of the ancient ship remains an enigma.",
+    "synonyms": [
+      "mystery",
+      "puzzle",
+      "riddle"
+    ],
+    "antonyms": [
+      "solution",
+      "clarity"
+    ]
+  },
+  {
+    "word": "fluctuate",
+    "translation": "o'zgarib turmoq, tebranmoq",
+    "phonetic": "/ˈflʌk.tʃu.eɪt/",
+    "partOfSpeech": "verb",
+    "definition": "Rise and fall irregularly in number or amount.",
+    "example": "Currency exchange rates fluctuate daily.",
+    "synonyms": [
+      "vary",
+      "oscillate",
+      "shift"
+    ],
+    "antonyms": [
+      "stabilize",
+      "remain"
+    ]
+  },
+  {
+    "word": "gratitude",
+    "translation": "minnatdorchilik, shukronalik",
+    "phonetic": "/ˈɡræt.ɪ.tjuːd/",
+    "partOfSpeech": "noun",
+    "definition": "The quality of being thankful; readiness to show appreciation.",
+    "example": "They expressed deep gratitude for our assistance.",
+    "synonyms": [
+      "thankfulness",
+      "appreciation",
+      "indebtedness"
+    ],
+    "antonyms": [
+      "ingratitude",
+      "ungratefulness"
+    ]
+  },
+  {
+    "word": "harmony",
+    "translation": "uyg'unlik, ahillik, hamohanglik",
+    "phonetic": "/ˈhɑːr.mə.ni/",
+    "partOfSpeech": "noun",
+    "definition": "Agreement or concord; a pleasing combination of parts.",
+    "example": "The neighbors lived together in peace and harmony.",
+    "synonyms": [
+      "accord",
+      "unity",
+      "balance"
+    ],
+    "antonyms": [
+      "discord",
+      "conflict"
+    ]
+  },
+  {
+    "word": "integrity",
+    "translation": "halollik, poklik, yaxlitlik",
+    "phonetic": "/ɪnˈtɛɡ.rə.ti/",
+    "partOfSpeech": "noun",
+    "definition": "The quality of being honest and having strong moral principles.",
+    "example": "Journalists must maintain high ethical integrity.",
+    "synonyms": [
+      "honesty",
+      "probity",
+      "rectitude"
+    ],
+    "antonyms": [
+      "dishonesty",
+      "corruption"
+    ]
+  },
+  {
+    "word": "lucid",
+    "translation": "ravshan, tiniq, tushunarli",
+    "phonetic": "/ˈluː.sɪd/",
+    "partOfSpeech": "adjective",
+    "definition": "Expressed clearly; easy to understand.",
+    "example": "The professor gave a lucid explanation of quantum mechanics.",
+    "synonyms": [
+      "clear",
+      "coherent",
+      "intelligible"
+    ],
+    "antonyms": [
+      "confused",
+      "obscure"
+    ]
+  },
+  {
+    "word": "meticulous",
+    "translation": "nihoyatda sinchkov, puxta, diqqatli",
+    "phonetic": "/məˈtɪk.jʊ.ləs/",
+    "partOfSpeech": "adjective",
+    "definition": "Showing great attention to detail; very careful and precise.",
+    "example": "Watchmaking requires meticulous craftsmanship.",
+    "synonyms": [
+      "careful",
+      "thorough",
+      "precise"
+    ],
+    "antonyms": [
+      "careless",
+      "sloppy"
+    ]
+  },
+  {
+    "word": "nostalgia",
+    "translation": "o'tmishni qo'msash, sog'inch",
+    "phonetic": "/nɒˈstæl.dʒə/",
+    "partOfSpeech": "noun",
+    "definition": "A sentimental longing or wistful affection for the past.",
+    "example": "Old photographs often evoke feelings of nostalgia.",
+    "synonyms": [
+      "wistfulness",
+      "reminiscence",
+      "longing"
+    ],
+    "antonyms": [
+      "indifference",
+      "forwardness"
+    ]
+  },
+  {
+    "word": "perseverance",
+    "translation": "matonat, sabr-toqat, qat'iyat",
+    "phonetic": "/ˌpɜːr.səˈvɪər.əns/",
+    "partOfSpeech": "noun",
+    "definition": "Persistence in doing something despite difficulty or delay in achieving success.",
+    "example": "Success in language learning requires perseverance.",
+    "synonyms": [
+      "persistence",
+      "determination",
+      "tenacity"
+    ],
+    "antonyms": [
+      "laziness",
+      "apathy"
+    ]
+  },
+  {
+    "word": "sanctuary",
+    "translation": "panoh, boshpana, qo'riqxona",
+    "phonetic": "/ˈsæŋk.tʃu.ɛr.i/",
+    "partOfSpeech": "noun",
+    "definition": "A place of refuge or safety.",
+    "example": "The wildlife sanctuary protects endangered birds.",
+    "synonyms": [
+      "refuge",
+      "haven",
+      "shelter"
+    ],
+    "antonyms": [
+      "hazard",
+      "trap"
+    ]
+  },
+  {
+    "word": "tenacious",
+    "translation": "qat'iyatli, bo'sh kelmaydigan, mahkam",
+    "phonetic": "/təˈneɪ.ʃəs/",
+    "partOfSpeech": "adjective",
+    "definition": "Tending to keep a firm hold of something; determined.",
+    "example": "She is a tenacious defender of human rights.",
+    "synonyms": [
+      "persistent",
+      "resolute",
+      "determined"
+    ],
+    "antonyms": [
+      "yielding",
+      "weak"
+    ]
+  },
+  {
+    "word": "unanimous",
+    "translation": "yakdil, bir ovozdan ma'qullangan",
+    "phonetic": "/juːˈnæn.ɪ.məs/",
+    "partOfSpeech": "adjective",
+    "definition": "Fully in agreement across all people involved.",
+    "example": "The committee reached a unanimous decision.",
+    "synonyms": [
+      "united",
+      "agreed",
+      "harmonious"
+    ],
+    "antonyms": [
+      "divided",
+      "split"
+    ]
+  },
+  {
+    "word": "zealous",
+    "translation": "g'ayratli, fidokor, jo'shqin",
+    "phonetic": "/ˈzɛl.əs/",
+    "partOfSpeech": "adjective",
+    "definition": "Having or showing great energy or enthusiasm.",
+    "example": "He is a zealous supporter of local sports.",
+    "synonyms": [
+      "enthusiastic",
+      "passionate",
+      "eager"
+    ],
+    "antonyms": [
+      "apathetic",
+      "indifferent"
+    ]
+  },
+  {
+    "word": "muvaffaqiyat",
+    "translation": "success, achievement, prosperity",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "The accomplishment of an aim or purpose.",
+    "example": "",
+    "synonyms": [
+      "achievement",
+      "triumph",
+      "victory"
+    ],
+    "antonyms": [
+      "failure",
+      "defeat"
+    ]
+  },
+  {
+    "word": "success",
+    "translation": "muvaffaqiyat, omad, yutuq",
+    "phonetic": "/səkˈsɛs/",
+    "partOfSpeech": "noun",
+    "definition": "The accomplishment of an aim or purpose.",
+    "example": "Hard work and focus led to her success.",
+    "synonyms": [
+      "achievement",
+      "triumph",
+      "accomplishment"
+    ],
+    "antonyms": [
+      "failure",
+      "defeat"
+    ]
+  },
+  {
+    "word": "shoshilinch",
+    "translation": "urgent, immediate, hasty",
+    "phonetic": "",
+    "partOfSpeech": "adjective",
+    "definition": "Requiring immediate action or attention.",
+    "example": "",
+    "synonyms": [
+      "urgent",
+      "pressing",
+      "immediate"
+    ],
+    "antonyms": [
+      "unhurried",
+      "leisurely"
+    ]
+  },
+  {
+    "word": "urgent",
+    "translation": "shoshilinch, kechiktirib bo'lmaydigan, zarur",
+    "phonetic": "/ˈɜːr.dʒənt/",
+    "partOfSpeech": "adjective",
+    "definition": "Requiring immediate action or attention.",
+    "example": "The hospital received an urgent request for blood.",
+    "synonyms": [
+      "pressing",
+      "critical",
+      "immediate"
+    ],
+    "antonyms": [
+      "trivial",
+      "minor"
+    ]
+  },
+  {
+    "word": "kashfiyot",
+    "translation": "discovery, invention, breakthrough",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "The action or process of discovering or being discovered.",
+    "example": "",
+    "synonyms": [
+      "discovery",
+      "finding",
+      "breakthrough"
+    ],
+    "antonyms": [
+      "concealment",
+      "loss"
+    ]
+  },
+  {
+    "word": "discovery",
+    "translation": "kashfiyot, topilma",
+    "phonetic": "/dɪˈskʌv.ər.i/",
+    "partOfSpeech": "noun",
+    "definition": "The action or process of discovering or being discovered.",
+    "example": "The discovery of penicillin transformed medicine.",
+    "synonyms": [
+      "finding",
+      "breakthrough",
+      "revelation"
+    ],
+    "antonyms": [
+      "ignorance",
+      "concealment"
+    ]
+  },
+  {
+    "word": "sadoqat",
+    "translation": "loyalty, devotion, faithfulness",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "A strong feeling of support or allegiance.",
+    "example": "",
+    "synonyms": [
+      "loyalty",
+      "fidelity",
+      "devotion"
+    ],
+    "antonyms": [
+      "betrayal",
+      "treachery"
+    ]
+  },
+  {
+    "word": "loyalty",
+    "translation": "sadoqat, vafodorlik",
+    "phonetic": "/ˈlɔɪ.əl.ti/",
+    "partOfSpeech": "noun",
+    "definition": "A strong feeling of support or allegiance.",
+    "example": "Their friendship was built on mutual loyalty.",
+    "synonyms": [
+      "fidelity",
+      "devotion",
+      "allegiance"
+    ],
+    "antonyms": [
+      "betrayal",
+      "disloyalty"
+    ]
+  },
+  {
+    "word": "tabiat",
+    "translation": "nature, environment, character",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "The phenomena of the physical world collectively.",
+    "example": "",
+    "synonyms": [
+      "nature",
+      "environment",
+      "wilderness"
+    ],
+    "antonyms": [
+      "artificiality"
+    ]
+  },
+  {
+    "word": "nature",
+    "translation": "tabiat, xarakter, mohiyat",
+    "phonetic": "/ˈneɪ.tʃər/",
+    "partOfSpeech": "noun",
+    "definition": "The phenomena of the physical world collectively, including plants and animals.",
+    "example": "We spent the weekend hiking in nature.",
+    "synonyms": [
+      "environment",
+      "wilderness",
+      "outdoors"
+    ],
+    "antonyms": [
+      "artifice",
+      "civilization"
+    ]
+  },
+  {
+    "word": "kitob",
+    "translation": "book, volume, tome",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "A written or printed work consisting of pages bound together.",
+    "example": "",
+    "synonyms": [
+      "book",
+      "volume",
+      "publication"
+    ],
+    "antonyms": []
+  },
+  {
+    "word": "book",
+    "translation": "kitob, asar",
+    "phonetic": "/bʊk/",
+    "partOfSpeech": "noun",
+    "definition": "A written or printed work consisting of pages glued or sewn together.",
+    "example": "I finished reading that fascinating book yesterday.",
+    "synonyms": [
+      "volume",
+      "tome",
+      "publication"
+    ],
+    "antonyms": []
+  },
+  {
+    "word": "ilhom",
+    "translation": "inspiration, motivation",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "The process of being mentally stimulated to do or feel something creative.",
+    "example": "",
+    "synonyms": [
+      "inspiration",
+      "motivation",
+      "creativity"
+    ],
+    "antonyms": [
+      "discouragement"
+    ]
+  },
+  {
+    "word": "inspiration",
+    "translation": "ilhom, ruhlanish",
+    "phonetic": "/ˌɪn.spəˈreɪ.ʃən/",
+    "partOfSpeech": "noun",
+    "definition": "The process of being mentally stimulated to do or feel something creative.",
+    "example": "The mountains were a source of inspiration for the painter.",
+    "synonyms": [
+      "motivation",
+      "stimulus",
+      "muse"
+    ],
+    "antonyms": [
+      "discouragement",
+      "apathy"
+    ]
+  },
+  {
+    "word": "texnologiya",
+    "translation": "technology, engineering",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "The application of scientific knowledge for practical purposes.",
+    "example": "",
+    "synonyms": [
+      "technology",
+      "engineering",
+      "machinery"
+    ],
+    "antonyms": []
+  },
+  {
+    "word": "technology",
+    "translation": "texnologiya, fan-texnika",
+    "phonetic": "/tɛkˈnɒl.ə.dʒi/",
+    "partOfSpeech": "noun",
+    "definition": "The application of scientific knowledge for practical purposes, especially in industry.",
+    "example": "Modern technology connects people across continents.",
+    "synonyms": [
+      "engineering",
+      "innovation",
+      "computing"
+    ],
+    "antonyms": [
+      "primitiveness"
+    ]
+  },
+  {
+    "word": "iqtisodiyot",
+    "translation": "economy, economics",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "The wealth and resources of a country or region.",
+    "example": "",
+    "synonyms": [
+      "economy",
+      "economics",
+      "finance"
+    ],
+    "antonyms": []
+  },
+  {
+    "word": "economy",
+    "translation": "iqtisodiyot, tejash",
+    "phonetic": "/ɪˈkɒn.ə.mi/",
+    "partOfSpeech": "noun",
+    "definition": "The wealth and resources of a country or region in terms of production and consumption.",
+    "example": "Tourism plays a major role in the local economy.",
+    "synonyms": [
+      "finance",
+      "commerce",
+      "market"
+    ],
+    "antonyms": [
+      "extravagance",
+      "waste"
+    ]
+  },
+  {
+    "word": "madaniyat",
+    "translation": "culture, civilization",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "The arts and other manifestations of human intellectual achievement.",
+    "example": "",
+    "synonyms": [
+      "culture",
+      "heritage",
+      "civilization"
+    ],
+    "antonyms": [
+      "barbarism"
+    ]
+  },
+  {
+    "word": "culture",
+    "translation": "madaniyat, urf-odat",
+    "phonetic": "/ˈkʌl.tʃər/",
+    "partOfSpeech": "noun",
+    "definition": "The customs, arts, social institutions, and achievements of a particular nation or people.",
+    "example": "Uzbekistan has a rich architectural culture.",
+    "synonyms": [
+      "heritage",
+      "civilization",
+      "tradition"
+    ],
+    "antonyms": [
+      "barbarism"
+    ]
+  },
+  {
+    "word": "tarbiya",
+    "translation": "upbringing, education, manners",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "The treatment and instruction received by a child from its parents.",
+    "example": "",
+    "synonyms": [
+      "upbringing",
+      "education",
+      "discipline"
+    ],
+    "antonyms": [
+      "neglect"
+    ]
+  },
+  {
+    "word": "bilim",
+    "translation": "knowledge, learning, science",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "Facts, information, and skills acquired through experience or education.",
+    "example": "",
+    "synonyms": [
+      "knowledge",
+      "wisdom",
+      "learning"
+    ],
+    "antonyms": [
+      "ignorance"
+    ]
+  },
+  {
+    "word": "knowledge",
+    "translation": "bilim, ma'rifat, xabardorlik",
+    "phonetic": "/ˈnɒl.ɪdʒ/",
+    "partOfSpeech": "noun",
+    "definition": "Facts, information, and skills acquired by a person through experience or education.",
+    "example": "Sharing knowledge empowers the entire community.",
+    "synonyms": [
+      "wisdom",
+      "learning",
+      "expertise"
+    ],
+    "antonyms": [
+      "ignorance",
+      "illiteracy"
+    ]
+  },
+  {
+    "word": "tinchlik",
+    "translation": "peace, tranquility, calm",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "Freedom from disturbance; tranquility.",
+    "example": "",
+    "synonyms": [
+      "peace",
+      "serenity",
+      "harmony"
+    ],
+    "antonyms": [
+      "war",
+      "conflict"
+    ]
+  },
+  {
+    "word": "peace",
+    "translation": "tinchlik, osoyishtalik, sulh",
+    "phonetic": "/piːs/",
+    "partOfSpeech": "noun",
+    "definition": "Freedom from disturbance; quiet and tranquility.",
+    "example": "Everyone hopes for lasting peace in the region.",
+    "synonyms": [
+      "tranquility",
+      "calm",
+      "harmony"
+    ],
+    "antonyms": [
+      "war",
+      "turmoil"
+    ]
+  },
+  {
+    "word": "do'stlik",
+    "translation": "friendship, companionship, amity",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "The state of being friends.",
+    "example": "",
+    "synonyms": [
+      "friendship",
+      "amity",
+      "camaraderie"
+    ],
+    "antonyms": [
+      "hostility",
+      "enmity"
+    ]
+  },
+  {
+    "word": "friendship",
+    "translation": "do'stlik, o'rtoqlik",
+    "phonetic": "/ˈfrɛnd.ʃɪp/",
+    "partOfSpeech": "noun",
+    "definition": "The emotions or conduct of friends; the state of being friends.",
+    "example": "True friendship endures through difficult times.",
+    "synonyms": [
+      "companionship",
+      "amity",
+      "bond"
+    ],
+    "antonyms": [
+      "hostility",
+      "rivalry"
+    ]
+  },
+  {
+    "word": "baxt",
+    "translation": "happiness, fortune, bliss",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "The state of being happy.",
+    "example": "",
+    "synonyms": [
+      "happiness",
+      "joy",
+      "felicity"
+    ],
+    "antonyms": [
+      "sorrow",
+      "misery"
+    ]
+  },
+  {
+    "word": "happiness",
+    "translation": "baxt, saodat, xursandchilik",
+    "phonetic": "/ˈhæp.i.nəs/",
+    "partOfSpeech": "noun",
+    "definition": "The state of being happy.",
+    "example": "Spending time with family brings real happiness.",
+    "synonyms": [
+      "joy",
+      "contentment",
+      "bliss"
+    ],
+    "antonyms": [
+      "sadness",
+      "misery"
+    ]
+  },
+  {
+    "word": "hayot",
+    "translation": "life, existence, living",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "The condition that distinguishes animals and plants from inorganic matter.",
+    "example": "",
+    "synonyms": [
+      "life",
+      "existence",
+      "vitality"
+    ],
+    "antonyms": [
+      "death"
+    ]
+  },
+  {
+    "word": "sevgi",
+    "translation": "love, affection, devotion",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "An intense feeling of deep affection.",
+    "example": "",
+    "synonyms": [
+      "love",
+      "affection",
+      "adoration"
+    ],
+    "antonyms": [
+      "hatred"
+    ]
+  },
+  {
+    "word": "umid",
+    "translation": "hope, expectation, optimism",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "A feeling of expectation and desire for a certain thing to happen.",
+    "example": "",
+    "synonyms": [
+      "hope",
+      "optimism",
+      "aspiration"
+    ],
+    "antonyms": [
+      "despair"
+    ]
+  },
+  {
+    "word": "orzu",
+    "translation": "dream, aspiration, wish",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "A cherished aspiration, ambition, or ideal.",
+    "example": "",
+    "synonyms": [
+      "dream",
+      "ambition",
+      "aspiration"
+    ],
+    "antonyms": [
+      "reality"
+    ]
+  },
+  {
+    "word": "mehnat",
+    "translation": "labor, work, effort",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "Work, especially hard physical work.",
+    "example": "",
+    "synonyms": [
+      "labor",
+      "work",
+      "toil"
+    ],
+    "antonyms": [
+      "idleness"
+    ]
+  },
+  {
+    "word": "vaqt",
+    "translation": "time, period, era",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "The indefinite continued progress of existence and events.",
+    "example": "",
+    "synonyms": [
+      "time",
+      "duration",
+      "moment"
+    ],
+    "antonyms": []
+  },
+  {
+    "word": "uy",
+    "translation": "house, home, residence",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "A building for human habitation.",
+    "example": "",
+    "synonyms": [
+      "house",
+      "home",
+      "dwelling"
+    ],
+    "antonyms": []
+  },
+  {
+    "word": "maktab",
+    "translation": "school, academy",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "An institution for educating children.",
+    "example": "",
+    "synonyms": [
+      "school",
+      "academy",
+      "institute"
+    ],
+    "antonyms": []
+  },
+  {
+    "word": "universitet",
+    "translation": "university, college",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "An educational institution designed for instruction and examination of students.",
+    "example": "",
+    "synonyms": [
+      "university",
+      "college",
+      "academy"
+    ],
+    "antonyms": []
+  },
+  {
+    "word": "shifokor",
+    "translation": "doctor, physician, medic",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "A qualified practitioner of medicine.",
+    "example": "",
+    "synonyms": [
+      "doctor",
+      "physician",
+      "surgeon"
+    ],
+    "antonyms": [
+      "patient"
+    ]
+  },
+  {
+    "word": "o'qituvchi",
+    "translation": "teacher, educator, instructor",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "A person who teaches, especially in a school.",
+    "example": "",
+    "synonyms": [
+      "teacher",
+      "instructor",
+      "educator"
+    ],
+    "antonyms": [
+      "student"
+    ]
+  },
+  {
+    "word": "talaba",
+    "translation": "student, scholar, learner",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "A person who is studying at a school or college.",
+    "example": "",
+    "synonyms": [
+      "student",
+      "scholar",
+      "pupil"
+    ],
+    "antonyms": [
+      "teacher"
+    ]
+  },
+  {
+    "word": "dasturlash",
+    "translation": "programming, coding, software development",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "The process of writing computer programs.",
+    "example": "",
+    "synonyms": [
+      "programming",
+      "coding",
+      "development"
+    ],
+    "antonyms": []
+  },
+  {
+    "word": "programming",
+    "translation": "dasturlash, kod yozish",
+    "phonetic": "/ˈprəʊ.ɡræm.ɪŋ/",
+    "partOfSpeech": "noun",
+    "definition": "The process or activity of writing computer programs.",
+    "example": "Kotlin programming is widely used for Android apps.",
+    "synonyms": [
+      "coding",
+      "development",
+      "scripting"
+    ],
+    "antonyms": []
+  },
+  {
+    "word": "sun'iy intellekt",
+    "translation": "artificial intelligence",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "The theory and development of computer systems able to perform tasks normally requiring human intelligence.",
+    "example": "",
+    "synonyms": [
+      "AI",
+      "machine intelligence"
+    ],
+    "antonyms": []
+  },
+  {
+    "word": "freedom",
+    "translation": "erkinlik, ozodlik, hurriyat",
+    "phonetic": "/ˈfriː.dəm/",
+    "partOfSpeech": "noun",
+    "definition": "The power or right to act, speak, or think as one wants without hindrance.",
+    "example": "Freedom of expression is a fundamental value.",
+    "synonyms": [
+      "liberty",
+      "independence",
+      "autonomy"
+    ],
+    "antonyms": [
+      "captivity",
+      "oppression"
+    ]
+  },
+  {
+    "word": "erkinlik",
+    "translation": "freedom, liberty, independence",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "The state of being free.",
+    "example": "",
+    "synonyms": [
+      "freedom",
+      "liberty",
+      "independence"
+    ],
+    "antonyms": [
+      "slavery",
+      "captivity"
+    ]
+  },
+  {
+    "word": "justice",
+    "translation": "adolat, haqiqat, odil sudlov",
+    "phonetic": "/ˈdʒʌs.tɪs/",
+    "partOfSpeech": "noun",
+    "definition": "Just behavior or treatment; fairness.",
+    "example": "The court was established to uphold justice.",
+    "synonyms": [
+      "fairness",
+      "equity",
+      "righteousness"
+    ],
+    "antonyms": [
+      "injustice",
+      "bias"
+    ]
+  },
+  {
+    "word": "adolat",
+    "translation": "justice, fairness, equity",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "Just behavior or treatment.",
+    "example": "",
+    "synonyms": [
+      "justice",
+      "fairness",
+      "impartiality"
+    ],
+    "antonyms": [
+      "injustice",
+      "unfairness"
+    ]
+  },
+  {
+    "word": "courage",
+    "translation": "jasorat, mardlik, botirlik",
+    "phonetic": "/ˈkʌr.ɪdʒ/",
+    "partOfSpeech": "noun",
+    "definition": "The ability to do something that frightens one; bravery.",
+    "example": "It takes courage to speak up in front of a crowd.",
+    "synonyms": [
+      "bravery",
+      "valor",
+      "fortitude"
+    ],
+    "antonyms": [
+      "cowardice",
+      "fear"
+    ]
+  },
+  {
+    "word": "jasorat",
+    "translation": "courage, bravery, boldness",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "Mental or moral strength to venture, persevere, and withstand danger.",
+    "example": "",
+    "synonyms": [
+      "courage",
+      "bravery",
+      "valor"
+    ],
+    "antonyms": [
+      "cowardice",
+      "timidity"
+    ]
+  },
+  {
+    "word": "wisdom",
+    "translation": "donolik, hikmat, aql-idrok",
+    "phonetic": "/ˈwɪz.dəm/",
+    "partOfSpeech": "noun",
+    "definition": "The quality of having experience, knowledge, and good judgment.",
+    "example": "Elders often share valuable wisdom with younger generations.",
+    "synonyms": [
+      "sagacity",
+      "insight",
+      "prudence"
+    ],
+    "antonyms": [
+      "folly",
+      "ignorance"
+    ]
+  },
+  {
+    "word": "donolik",
+    "translation": "wisdom, sagacity, prudence",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "Soundness of an action or decision with regard to the application of experience and knowledge.",
+    "example": "",
+    "synonyms": [
+      "wisdom",
+      "sagacity",
+      "insight"
+    ],
+    "antonyms": [
+      "folly",
+      "stupidity"
+    ]
+  },
+  {
+    "word": "curiosity",
+    "translation": "qiziquvchanlik, bilishga intilish",
+    "phonetic": "/ˌkjʊər.iˈɒs.ə.ti/",
+    "partOfSpeech": "noun",
+    "definition": "A strong desire to know or learn something.",
+    "example": "Curiosity drives scientific research.",
+    "synonyms": [
+      "inquisitiveness",
+      "interest",
+      "wonder"
+    ],
+    "antonyms": [
+      "apathy",
+      "indifference"
+    ]
+  },
+  {
+    "word": "qiziquvchanlik",
+    "translation": "curiosity, inquisitiveness",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "A strong desire to know or learn something.",
+    "example": "",
+    "synonyms": [
+      "curiosity",
+      "inquisitiveness",
+      "wonder"
+    ],
+    "antonyms": [
+      "indifference"
+    ]
+  },
+  {
+    "word": "efficiency",
+    "translation": "samaradorlik, unumdorlik",
+    "phonetic": "/ɪˈfɪʃ.ən.si/",
+    "partOfSpeech": "noun",
+    "definition": "The state or quality of being efficient; achieving maximum productivity with minimum wasted effort.",
+    "example": "New software improved the team's efficiency.",
+    "synonyms": [
+      "productivity",
+      "effectiveness",
+      "competence"
+    ],
+    "antonyms": [
+      "inefficiency",
+      "waste"
+    ]
+  },
+  {
+    "word": "samaradorlik",
+    "translation": "efficiency, effectiveness, productivity",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "The degree to which something is successful in producing a desired result.",
+    "example": "",
+    "synonyms": [
+      "efficiency",
+      "effectiveness",
+      "productivity"
+    ],
+    "antonyms": [
+      "ineffectiveness"
+    ]
+  },
+  {
+    "word": "collaborate",
+    "translation": "hamkorlik qilmoq, birgalikda ishlamoq",
+    "phonetic": "/kəˈlæb.ə.reɪt/",
+    "partOfSpeech": "verb",
+    "definition": "Work jointly on an activity, especially to produce or create something.",
+    "example": "Scientists around the world collaborate on climate studies.",
+    "synonyms": [
+      "cooperate",
+      "partner",
+      "team up"
+    ],
+    "antonyms": [
+      "compete",
+      "oppose"
+    ]
+  },
+  {
+    "word": "hamkorlik",
+    "translation": "cooperation, collaboration, partnership",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "The action of working with someone to produce or create something.",
+    "example": "",
+    "synonyms": [
+      "cooperation",
+      "collaboration",
+      "partnership"
+    ],
+    "antonyms": [
+      "conflict",
+      "rivalry"
+    ]
+  },
+  {
+    "word": "transparent",
+    "translation": "shaffof, tiniq, ochiq-oydin",
+    "phonetic": "/trænsˈpær.ənt/",
+    "partOfSpeech": "adjective",
+    "definition": "Allowing light to pass through so that objects behind can be distinctly seen; easy to perceive.",
+    "example": "The organization promised transparent financial reporting.",
+    "synonyms": [
+      "clear",
+      "translucent",
+      "candid"
+    ],
+    "antonyms": [
+      "opaque",
+      "secretive"
+    ]
+  },
+  {
+    "word": "shaffof",
+    "translation": "transparent, clear, crystal",
+    "phonetic": "",
+    "partOfSpeech": "adjective",
+    "definition": "Allowing light to pass through; open and honest.",
+    "example": "",
+    "synonyms": [
+      "transparent",
+      "clear",
+      "lucid"
+    ],
+    "antonyms": [
+      "opaque",
+      "cloudy"
+    ]
+  },
+  {
+    "word": "persevere",
+    "translation": "matonat ko'rsatmoq, bo'sh kelmaslik",
+    "phonetic": "/ˌpɜːr.səˈvɪər/",
+    "partOfSpeech": "verb",
+    "definition": "Continue in a course of action even in the face of difficulty.",
+    "example": "Despite early setbacks, the researchers continued to persevere.",
+    "synonyms": [
+      "persist",
+      "endure",
+      "continue"
+    ],
+    "antonyms": [
+      "quit",
+      "surrender"
+    ]
+  },
+  {
+    "word": "synthesize",
+    "translation": "sintez qilmoq, birlashtirmoq",
+    "phonetic": "/ˈsɪn.θə.saɪz/",
+    "partOfSpeech": "verb",
+    "definition": "Combine a number of things into a coherent whole.",
+    "example": "The essay synthesizes ideas from several historians.",
+    "synonyms": [
+      "combine",
+      "integrate",
+      "merge"
+    ],
+    "antonyms": [
+      "separate",
+      "divide"
+    ]
+  },
+  {
+    "word": "analyze",
+    "translation": "tahlil qilmoq, analiz qilmoq",
+    "phonetic": "/ˈæn.ə.laɪz/",
+    "partOfSpeech": "verb",
+    "definition": "Examine methodically and in detail the constitution or structure of something.",
+    "example": "Data analysts analyze customer behavior patterns.",
+    "synonyms": [
+      "examine",
+      "evaluate",
+      "inspect"
+    ],
+    "antonyms": [
+      "ignore",
+      "overlook"
+    ]
+  },
+  {
+    "word": "tahlil",
+    "translation": "analysis, evaluation, review",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "Detailed examination of the elements or structure of something.",
+    "example": "",
+    "synonyms": [
+      "analysis",
+      "examination",
+      "assessment"
+    ],
+    "antonyms": [
+      "synthesis"
+    ]
+  },
+  {
+    "word": "architecture",
+    "translation": "me'morchilik, arxitektura, tuzilma",
+    "phonetic": "/ˈɑːr.kɪ.tɛk.tʃər/",
+    "partOfSpeech": "noun",
+    "definition": "The art or practice of designing and constructing buildings or complex systems.",
+    "example": "Samarkand is famous for its Islamic architecture.",
+    "synonyms": [
+      "design",
+      "structure",
+      "construction"
+    ],
+    "antonyms": []
+  },
+  {
+    "word": "me'morchilik",
+    "translation": "architecture, building design",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "The art and technique of designing and building.",
+    "example": "",
+    "synonyms": [
+      "architecture",
+      "design",
+      "construction"
+    ],
+    "antonyms": []
+  },
+  {
+    "word": "astronomy",
+    "translation": "astronomiya, falakiyot ilmi",
+    "phonetic": "/əˈstrɒn.ə.mi/",
+    "partOfSpeech": "noun",
+    "definition": "The branch of science which deals with celestial objects, space, and the physical universe.",
+    "example": "Ulugh Beg made groundbreaking contributions to astronomy.",
+    "synonyms": [
+      "astrophysics",
+      "cosmology",
+      "stargazing"
+    ],
+    "antonyms": []
+  },
+  {
+    "word": "philosophy",
+    "translation": "falsafa, dunyoqarash",
+    "phonetic": "/fɪˈlɒs.ə.fi/",
+    "partOfSpeech": "noun",
+    "definition": "The study of the fundamental nature of knowledge, reality, and existence.",
+    "example": "Ancient Greek philosophy shaped Western thought.",
+    "synonyms": [
+      "ideology",
+      "doctrine",
+      "worldview"
+    ],
+    "antonyms": []
+  },
+  {
+    "word": "falsafa",
+    "translation": "philosophy, worldview",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "The study of fundamental questions about existence and knowledge.",
+    "example": "",
+    "synonyms": [
+      "philosophy",
+      "thought",
+      "doctrine"
+    ],
+    "antonyms": []
+  },
+  {
+    "word": "psychology",
+    "translation": "psixologiya, ruhshunoslik",
+    "phonetic": "/saɪˈkɒl.ə.dʒi/",
+    "partOfSpeech": "noun",
+    "definition": "The scientific study of the human mind and its functions.",
+    "example": "Cognitive psychology explores how people process information.",
+    "synonyms": [
+      "behavioral science",
+      "mindset"
+    ],
+    "antonyms": []
+  },
+  {
+    "word": "ecosystem",
+    "translation": "ekotizim, tabiiy muhit tizimi",
+    "phonetic": "/ˈiː.kəʊˌsɪs.təm/",
+    "partOfSpeech": "noun",
+    "definition": "A biological community of interacting organisms and their physical environment.",
+    "example": "Wetlands form a vital ecosystem for migratory birds.",
+    "synonyms": [
+      "habitat",
+      "biome",
+      "environment"
+    ],
+    "antonyms": []
+  },
+  {
+    "word": "biodiversity",
+    "translation": "biologik xilma-xillik",
+    "phonetic": "/ˌbaɪ.əʊ.daɪˈvɜːr.sə.ti/",
+    "partOfSpeech": "noun",
+    "definition": "The variety of plant and animal life in the world or in a particular habitat.",
+    "example": "Rainforests hold immense biodiversity.",
+    "synonyms": [
+      "ecological variety",
+      "wildlife diversity"
+    ],
+    "antonyms": [
+      "monoculture"
+    ]
+  },
+  {
+    "word": "quantum",
+    "translation": "kvant, eng kichik miqdor",
+    "phonetic": "/ˈkwɒn.təm/",
+    "partOfSpeech": "noun",
+    "definition": "A discrete quantity of energy proportional in magnitude to the frequency of radiation.",
+    "example": "Quantum computing promises breakthroughs in cryptography.",
+    "synonyms": [
+      "unit",
+      "packet",
+      "increment"
+    ],
+    "antonyms": []
+  },
+  {
+    "word": "velocity",
+    "translation": "tezlik, sur'at",
+    "phonetic": "/vəˈlɒs.ə.ti/",
+    "partOfSpeech": "noun",
+    "definition": "The speed of something in a given direction.",
+    "example": "The spacecraft reached escape velocity.",
+    "synonyms": [
+      "speed",
+      "pace",
+      "swiftness"
+    ],
+    "antonyms": [
+      "slowness",
+      "stillness"
+    ]
+  },
+  {
+    "word": "tezlik",
+    "translation": "speed, velocity, frequency",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "The rate at which someone or something moves or operates.",
+    "example": "",
+    "synonyms": [
+      "speed",
+      "velocity",
+      "quickness"
+    ],
+    "antonyms": [
+      "slowness"
+    ]
+  },
+  {
+    "word": "momentum",
+    "translation": "impuls, harakat kuchi, sur'at",
+    "phonetic": "/məˈmɛn.təm/",
+    "partOfSpeech": "noun",
+    "definition": "The impetus gained by a moving object or developing process.",
+    "example": "The startup gained strong momentum after its launch.",
+    "synonyms": [
+      "impetus",
+      "drive",
+      "thrust"
+    ],
+    "antonyms": [
+      "inertia",
+      "stagnation"
+    ]
+  },
+  {
+    "word": "equilibrium",
+    "translation": "muvozanat, tenglik holati",
+    "phonetic": "/ˌiː.kwɪˈlɪb.ri.əm/",
+    "partOfSpeech": "noun",
+    "definition": "A state in which opposing forces or influences are balanced.",
+    "example": "Ecosystems naturally seek an equilibrium.",
+    "synonyms": [
+      "balance",
+      "stability",
+      "poise"
+    ],
+    "antonyms": [
+      "imbalance",
+      "instability"
+    ]
+  },
+  {
+    "word": "muvozanat",
+    "translation": "balance, equilibrium, stability",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "An even distribution of weight or forces.",
+    "example": "",
+    "synonyms": [
+      "balance",
+      "equilibrium",
+      "harmony"
+    ],
+    "antonyms": [
+      "imbalance"
+    ]
+  },
+  {
+    "word": "profound",
+    "translation": "chuqur, teran, zalvorli",
+    "phonetic": "/prəˈfaʊnd/",
+    "partOfSpeech": "adjective",
+    "definition": "Very great or intense; having or showing great knowledge or insight.",
+    "example": "Reading classic literature had a profound effect on him.",
+    "synonyms": [
+      "deep",
+      "intense",
+      "insightful"
+    ],
+    "antonyms": [
+      "superficial",
+      "trivial"
+    ]
+  },
+  {
+    "word": "chuqur",
+    "translation": "deep, profound, thorough",
+    "phonetic": "",
+    "partOfSpeech": "adjective",
+    "definition": "Extending far down from the top or surface; intense.",
+    "example": "",
+    "synonyms": [
+      "deep",
+      "profound",
+      "intense"
+    ],
+    "antonyms": [
+      "shallow"
+    ]
+  },
+  {
+    "word": "versatile",
+    "translation": "ko'p qirrali, universal, moslashuvchan",
+    "phonetic": "/ˈvɜːr.sə.taɪl/",
+    "partOfSpeech": "adjective",
+    "definition": "Able to adapt or be adapted to many different functions or activities.",
+    "example": "Python is a versatile programming language.",
+    "synonyms": [
+      "adaptable",
+      "flexible",
+      "multitalented"
+    ],
+    "antonyms": [
+      "limited",
+      "inflexible"
+    ]
+  },
+  {
+    "word": "authentic",
+    "translation": "haqiqiy, asl, ishonchli",
+    "phonetic": "/ɔːˈθɛn.tɪk/",
+    "partOfSpeech": "adjective",
+    "definition": "Of undisputed origin and not a copy; genuine.",
+    "example": "The museum displays authentic manuscripts from the 15th century.",
+    "synonyms": [
+      "genuine",
+      "real",
+      "original"
+    ],
+    "antonyms": [
+      "fake",
+      "counterfeit"
+    ]
+  },
+  {
+    "word": "haqiqiy",
+    "translation": "real, authentic, genuine, true",
+    "phonetic": "",
+    "partOfSpeech": "adjective",
+    "definition": "Actually existing as a thing or occurring in fact; not imagined.",
+    "example": "",
+    "synonyms": [
+      "real",
+      "genuine",
+      "authentic"
+    ],
+    "antonyms": [
+      "fake",
+      "false"
+    ]
+  },
+  {
+    "word": "magnificent",
+    "translation": "muhtasham, ulug'vor, ajoyib",
+    "phonetic": "/mæɡˈnɪf.ɪ.sənt/",
+    "partOfSpeech": "adjective",
+    "definition": "Impressively beautiful, elaborate, or extravagant.",
+    "example": "The Registan Square is a magnificent architectural ensemble.",
+    "synonyms": [
+      "splendid",
+      "grand",
+      "majestic"
+    ],
+    "antonyms": [
+      "ordinary",
+      "modest"
+    ]
+  },
+  {
+    "word": "muhtasham",
+    "translation": "magnificent, grand, splendid",
+    "phonetic": "",
+    "partOfSpeech": "adjective",
+    "definition": "Impressively beautiful and grand.",
+    "example": "",
+    "synonyms": [
+      "magnificent",
+      "splendid",
+      "majestic"
+    ],
+    "antonyms": [
+      "humble",
+      "plain"
+    ]
+  },
+  {
+    "word": "serenity",
+    "translation": "osoyishtalik, xotirjamlik, sokinlik",
+    "phonetic": "/səˈrɛn.ə.ti/",
+    "partOfSpeech": "noun",
+    "definition": "The state of being calm, peaceful, and untroubled.",
+    "example": "Morning walks by the lake bring a sense of serenity.",
+    "synonyms": [
+      "calmness",
+      "tranquility",
+      "peace"
+    ],
+    "antonyms": [
+      "agitation",
+      "chaos"
+    ]
+  },
+  {
+    "word": "xotirjamlik",
+    "translation": "calmness, serenity, composure",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "The state or quality of being free from agitation or strong emotion.",
+    "example": "",
+    "synonyms": [
+      "calmness",
+      "serenity",
+      "peace"
+    ],
+    "antonyms": [
+      "anxiety",
+      "panic"
+    ]
+  },
+  {
+    "word": "compassion",
+    "translation": "rahm-shafqat, mehr-oqibat",
+    "phonetic": "/kəmˈpæʃ.ən/",
+    "partOfSpeech": "noun",
+    "definition": "Sympathetic pity and concern for the sufferings or misfortunes of others.",
+    "example": "Volunteers treated the displaced families with great compassion.",
+    "synonyms": [
+      "empathy",
+      "kindness",
+      "mercy"
+    ],
+    "antonyms": [
+      "cruelty",
+      "indifference"
+    ]
+  },
+  {
+    "word": "mehr",
+    "translation": "affection, kindness, warmth",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "A gentle feeling of fondness or liking.",
+    "example": "",
+    "synonyms": [
+      "affection",
+      "kindness",
+      "love"
+    ],
+    "antonyms": [
+      "coldness",
+      "hatred"
+    ]
+  },
+  {
+    "word": "hospitality",
+    "translation": "mehmondo'stlik, izzat-ikrom",
+    "phonetic": "/ˌhɒs.pɪˈtæl.ə.ti/",
+    "partOfSpeech": "noun",
+    "definition": "The friendly and generous reception and entertainment of guests.",
+    "example": "Uzbek hospitality is renowned around the globe.",
+    "synonyms": [
+      "warmth",
+      "generosity",
+      "welcoming"
+    ],
+    "antonyms": [
+      "hostility",
+      "unfriendliness"
+    ]
+  },
+  {
+    "word": "mehmondo'stlik",
+    "translation": "hospitality, warmth",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "Friendly and generous reception of guests.",
+    "example": "",
+    "synonyms": [
+      "hospitality",
+      "cordiality"
+    ],
+    "antonyms": [
+      "hostility"
+    ]
+  },
+  {
+    "word": "dostona",
+    "translation": "friendly, amicable, cordial",
+    "phonetic": "",
+    "partOfSpeech": "adjective",
+    "definition": "Kind and pleasant.",
+    "example": "",
+    "synonyms": [
+      "friendly",
+      "cordial",
+      "warm"
+    ],
+    "antonyms": [
+      "hostile"
+    ]
+  },
+  {
+    "word": "do'stona",
+    "translation": "friendly, amicable, warm",
+    "phonetic": "",
+    "partOfSpeech": "adjective",
+    "definition": "Kind and pleasant toward others.",
+    "example": "",
+    "synonyms": [
+      "friendly",
+      "amicable",
+      "warm"
+    ],
+    "antonyms": [
+      "hostile"
+    ]
+  },
+  {
+    "word": "ishonch",
+    "translation": "trust, confidence, faith",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "Firm belief in the reliability or truth of someone or something.",
+    "example": "",
+    "synonyms": [
+      "trust",
+      "confidence",
+      "belief"
+    ],
+    "antonyms": [
+      "doubt",
+      "distrust"
+    ]
+  },
+  {
+    "word": "confidence",
+    "translation": "ishonch, o'ziga ishonch",
+    "phonetic": "/ˈkɒn.fɪ.dəns/",
+    "partOfSpeech": "noun",
+    "definition": "The feeling or belief that one can rely on someone or something; self-assurance.",
+    "example": "Practice builds confidence when speaking English.",
+    "synonyms": [
+      "assurance",
+      "trust",
+      "conviction"
+    ],
+    "antonyms": [
+      "doubt",
+      "insecurity"
+    ]
+  },
+  {
+    "word": "mas'uliyat",
+    "translation": "responsibility, accountability",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "The state or fact of having a duty to deal with something.",
+    "example": "",
+    "synonyms": [
+      "responsibility",
+      "duty",
+      "accountability"
+    ],
+    "antonyms": [
+      "irresponsibility"
+    ]
+  },
+  {
+    "word": "responsibility",
+    "translation": "mas'uliyat, javobgarlik, burch",
+    "phonetic": "/rɪˌspɒn.səˈbɪl.ɪ.ti/",
+    "partOfSpeech": "noun",
+    "definition": "The state or fact of having a duty to deal with something or of having control over someone.",
+    "example": "Leaders carry a heavy responsibility for team decisions.",
+    "synonyms": [
+      "duty",
+      "obligation",
+      "accountability"
+    ],
+    "antonyms": [
+      "irresponsibility"
+    ]
+  },
+  {
+    "word": "imkoniyat",
+    "translation": "opportunity, possibility, capability",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "A set of circumstances that makes it possible to do something.",
+    "example": "",
+    "synonyms": [
+      "opportunity",
+      "chance",
+      "possibility"
+    ],
+    "antonyms": [
+      "impossibility"
+    ]
+  },
+  {
+    "word": "opportunity",
+    "translation": "imkoniyat, qulay fursat",
+    "phonetic": "/ˌɒp.ərˈtjuː.nə.ti/",
+    "partOfSpeech": "noun",
+    "definition": "A set of circumstances that makes it possible to do something.",
+    "example": "The scholarship gave her an opportunity to study abroad.",
+    "synonyms": [
+      "chance",
+      "occasion",
+      "opening"
+    ],
+    "antonyms": [
+      "obstacle"
+    ]
+  },
+  {
+    "word": "rivojlanish",
+    "translation": "development, growth, progress",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "The process of developing or being developed.",
+    "example": "",
+    "synonyms": [
+      "development",
+      "growth",
+      "advancement"
+    ],
+    "antonyms": [
+      "decline",
+      "stagnation"
+    ]
+  },
+  {
+    "word": "development",
+    "translation": "rivojlanish, taraqqiyot, ishlab chiqish",
+    "phonetic": "/dɪˈvɛl.əp.mənt/",
+    "partOfSpeech": "noun",
+    "definition": "The process of developing or being developed.",
+    "example": "Education is key to sustainable development.",
+    "synonyms": [
+      "growth",
+      "progress",
+      "evolution"
+    ],
+    "antonyms": [
+      "decline",
+      "regression"
+    ]
+  },
+  {
+    "word": "maqsad",
+    "translation": "goal, purpose, aim, objective",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "The object of a person's ambition or effort; an aim or desired result.",
+    "example": "",
+    "synonyms": [
+      "goal",
+      "aim",
+      "objective"
+    ],
+    "antonyms": []
+  },
+  {
+    "word": "sabab",
+    "translation": "reason, cause, motive",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "A cause, explanation, or justification for an action or event.",
+    "example": "",
+    "synonyms": [
+      "reason",
+      "cause",
+      "motive"
+    ],
+    "antonyms": [
+      "result",
+      "effect"
+    ]
+  },
+  {
+    "word": "natija",
+    "translation": "result, outcome, consequence",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "A consequence, effect, or outcome of something.",
+    "example": "",
+    "synonyms": [
+      "result",
+      "outcome",
+      "effect"
+    ],
+    "antonyms": [
+      "cause"
+    ]
+  },
+  {
+    "word": "savol",
+    "translation": "question, inquiry, query",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "A sentence worded or expressed so as to elicit information.",
+    "example": "",
+    "synonyms": [
+      "question",
+      "query",
+      "inquiry"
+    ],
+    "antonyms": [
+      "answer"
+    ]
+  },
+  {
+    "word": "javob",
+    "translation": "answer, reply, response",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "A thing said, written, or done to deal with or as a reaction to a question.",
+    "example": "",
+    "synonyms": [
+      "answer",
+      "reply",
+      "response"
+    ],
+    "antonyms": [
+      "question"
+    ]
+  },
+  {
+    "word": "yordam",
+    "translation": "help, assistance, aid, support",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "The action of helping someone to do something.",
+    "example": "",
+    "synonyms": [
+      "help",
+      "aid",
+      "assistance"
+    ],
+    "antonyms": [
+      "hindrance"
+    ]
+  },
+  {
+    "word": "do'st",
+    "translation": "friend, companion, ally",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "A person whom one knows and with whom one has a bond of mutual affection.",
+    "example": "",
+    "synonyms": [
+      "friend",
+      "companion",
+      "pal"
+    ],
+    "antonyms": [
+      "enemy",
+      "foe"
+    ]
+  },
+  {
+    "word": "oila",
+    "translation": "family, household",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "A group of one or more parents and their children living together.",
+    "example": "",
+    "synonyms": [
+      "family",
+      "household",
+      "kin"
+    ],
+    "antonyms": []
+  },
+  {
+    "word": "vatan",
+    "translation": "homeland, motherland, country",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "A person's or a people's native land.",
+    "example": "",
+    "synonyms": [
+      "homeland",
+      "motherland",
+      "native land"
+    ],
+    "antonyms": []
+  },
+  {
+    "word": "sayohat",
+    "translation": "travel, journey, trip, voyage",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "The action of traveling, typically abroad.",
+    "example": "",
+    "synonyms": [
+      "travel",
+      "journey",
+      "trip"
+    ],
+    "antonyms": []
+  },
+  {
+    "word": "salomatlik",
+    "translation": "health, wellness, well-being",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "The state of being free from illness or injury.",
+    "example": "",
+    "synonyms": [
+      "health",
+      "wellness",
+      "fitness"
+    ],
+    "antonyms": [
+      "illness"
+    ]
+  },
+  {
+    "word": "baxtli",
+    "translation": "happy, joyful, fortunate",
+    "phonetic": "",
+    "partOfSpeech": "adjective",
+    "definition": "Feeling or showing pleasure or contentment.",
+    "example": "",
+    "synonyms": [
+      "happy",
+      "joyful",
+      "glad"
+    ],
+    "antonyms": [
+      "sad",
+      "unhappy"
+    ]
+  },
+  {
+    "word": "aqlli",
+    "translation": "intelligent, smart, clever, wise",
+    "phonetic": "",
+    "partOfSpeech": "adjective",
+    "definition": "Having or showing intelligence, especially of a high level.",
+    "example": "",
+    "synonyms": [
+      "smart",
+      "intelligent",
+      "clever"
+    ],
+    "antonyms": [
+      "foolish"
+    ]
+  },
+  {
+    "word": "chiroyli",
+    "translation": "beautiful, lovely, attractive",
+    "phonetic": "",
+    "partOfSpeech": "adjective",
+    "definition": "Pleasing the senses or mind aesthetically.",
+    "example": "",
+    "synonyms": [
+      "beautiful",
+      "pretty",
+      "lovely"
+    ],
+    "antonyms": [
+      "ugly"
+    ]
+  },
+  {
+    "word": "tez",
+    "translation": "fast, quick, rapid, swift",
+    "phonetic": "",
+    "partOfSpeech": "adjective",
+    "definition": "Moving or capable of moving at high speed.",
+    "example": "",
+    "synonyms": [
+      "fast",
+      "quick",
+      "rapid"
+    ],
+    "antonyms": [
+      "slow"
+    ]
+  },
+  {
+    "word": "katta",
+    "translation": "big, large, huge, great",
+    "phonetic": "",
+    "partOfSpeech": "adjective",
+    "definition": "Of considerable size, extent, or intensity.",
+    "example": "",
+    "synonyms": [
+      "big",
+      "large",
+      "great"
+    ],
+    "antonyms": [
+      "small",
+      "tiny"
+    ]
+  },
+  {
+    "word": "kichik",
+    "translation": "small, little, tiny",
+    "phonetic": "",
+    "partOfSpeech": "adjective",
+    "definition": "Of a size that is less than normal or usual.",
+    "example": "",
+    "synonyms": [
+      "small",
+      "little",
+      "tiny"
+    ],
+    "antonyms": [
+      "large",
+      "huge"
+    ]
+  },
+  {
+    "word": "yangi",
+    "translation": "new, novel, fresh, modern",
+    "phonetic": "",
+    "partOfSpeech": "adjective",
+    "definition": "Not existing before; made, introduced, or discovered recently.",
+    "example": "",
+    "synonyms": [
+      "new",
+      "modern",
+      "fresh"
+    ],
+    "antonyms": [
+      "old",
+      "ancient"
+    ]
+  },
+  {
+    "word": "eski",
+    "translation": "old, ancient, outdated",
+    "phonetic": "",
+    "partOfSpeech": "adjective",
+    "definition": "Having lived for a long time; no longer young or new.",
+    "example": "",
+    "synonyms": [
+      "old",
+      "ancient",
+      "vintage"
+    ],
+    "antonyms": [
+      "new",
+      "modern"
+    ]
+  },
+  {
+    "word": "muhim",
+    "translation": "important, crucial, significant",
+    "phonetic": "",
+    "partOfSpeech": "adjective",
+    "definition": "Of great significance or value.",
+    "example": "",
+    "synonyms": [
+      "important",
+      "significant",
+      "vital"
+    ],
+    "antonyms": [
+      "trivial",
+      "minor"
+    ]
+  },
+  {
+    "word": "qiyin",
+    "translation": "difficult, hard, challenging",
+    "phonetic": "",
+    "partOfSpeech": "adjective",
+    "definition": "Needing much effort or skill to accomplish, deal with, or understand.",
+    "example": "",
+    "synonyms": [
+      "difficult",
+      "hard",
+      "tough"
+    ],
+    "antonyms": [
+      "easy",
+      "simple"
+    ]
+  },
+  {
+    "word": "oson",
+    "translation": "easy, simple, effortless",
+    "phonetic": "",
+    "partOfSpeech": "adjective",
+    "definition": "Achieved without great effort; presenting few difficulties.",
+    "example": "",
+    "synonyms": [
+      "easy",
+      "simple",
+      "effortless"
+    ],
+    "antonyms": [
+      "difficult",
+      "hard"
+    ]
+  },
+  {
+    "word": "o'rganmoq",
+    "translation": "learn, study, master",
+    "phonetic": "",
+    "partOfSpeech": "verb",
+    "definition": "Gain or acquire knowledge of or skill in something by study or experience.",
+    "example": "",
+    "synonyms": [
+      "learn",
+      "study",
+      "acquire"
+    ],
+    "antonyms": [
+      "forget"
+    ]
+  },
+  {
+    "word": "tushunmoq",
+    "translation": "understand, comprehend, grasp",
+    "phonetic": "",
+    "partOfSpeech": "verb",
+    "definition": "Perceive the intended meaning of words, a language, or a speaker.",
+    "example": "",
+    "synonyms": [
+      "understand",
+      "comprehend",
+      "grasp"
+    ],
+    "antonyms": [
+      "misunderstand"
+    ]
+  },
+  {
+    "word": "yaratmoq",
+    "translation": "create, invent, produce",
+    "phonetic": "",
+    "partOfSpeech": "verb",
+    "definition": "Bring something into existence.",
+    "example": "",
+    "synonyms": [
+      "create",
+      "invent",
+      "build"
+    ],
+    "antonyms": [
+      "destroy"
+    ]
+  },
+  {
+    "word": "rivojlantirmoq",
+    "translation": "develop, advance, improve",
+    "phonetic": "",
+    "partOfSpeech": "verb",
+    "definition": "Grow or cause to grow and become more mature, advanced, or elaborate.",
+    "example": "",
+    "synonyms": [
+      "develop",
+      "improve",
+      "advance"
+    ],
+    "antonyms": [
+      "hinder"
+    ]
+  },
+  {
+    "word": "tadqiqot",
+    "translation": "research, study, investigation",
+    "phonetic": "",
+    "partOfSpeech": "noun",
+    "definition": "The systematic investigation into and study of materials and sources.",
+    "example": "",
+    "synonyms": [
+      "research",
+      "investigation",
+      "study"
+    ],
+    "antonyms": []
+  },
+  {
+    "word": "research",
+    "translation": "tadqiqot, ilmiy izlanish",
+    "phonetic": "/rɪˈsɜːrtʃ/",
+    "partOfSpeech": "noun",
+    "definition": "The systematic investigation into and study of materials and sources to establish facts.",
+    "example": "Medical research has extended life expectancy.",
+    "synonyms": [
+      "study",
+      "investigation",
+      "inquiry"
+    ],
+    "antonyms": []
+  }
+]

@@ -1,25 +1,48 @@
 package com.example.ui.screens
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.CloudDownload
+import androidx.compose.material.icons.filled.Download
+import androidx.compose.material.icons.filled.EmojiEvents
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
@@ -31,6 +54,39 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.FileProvider
+import com.example.ui.components.GlassActionButton
+import com.example.ui.components.GlassCard
+import com.example.ui.components.GlassLinearProgress
+import com.example.ui.components.GlassModalDialog
+import com.example.ui.components.GlassPill
+import com.example.ui.components.GlassSurfaceBox
+import com.example.ui.components.GlassTier
+import com.example.ui.components.GlassTopAppBar
+import com.example.ui.components.glassFilterChipBorder
+import com.example.ui.components.glassFilterChipColors
+import com.example.ui.theme.GlassAmberAccent
+import com.example.ui.theme.GlassAmberBorder
+import com.example.ui.theme.GlassAmberFill
+import com.example.ui.theme.GlassCyanAccent
+import com.example.ui.theme.GlassCyanBorder
+import com.example.ui.theme.GlassCyanFill
+import com.example.ui.theme.GlassEmeraldAccent
+import com.example.ui.theme.GlassEmeraldBorder
+import com.example.ui.theme.GlassEmeraldFill
+import com.example.ui.theme.GlassPinkAccent
+import com.example.ui.theme.GlassRoyalBlueAccent
+import com.example.ui.theme.GlassRoyalBlueBorder
+import com.example.ui.theme.GlassRoyalBlueFill
+import com.example.ui.theme.GlassTier1Border
+import com.example.ui.theme.GlassTier1Fill
+import com.example.ui.theme.GlassTier3Border
+import com.example.ui.theme.GlassTier3Fill
+import com.example.ui.theme.GlassVioletAccent
+import com.example.ui.theme.GlassVioletBorder
+import com.example.ui.theme.GlassVioletFill
+import com.example.ui.theme.TextBodyTranslucent
+import com.example.ui.theme.TextMetaTranslucent
+import com.example.ui.theme.TextPrimaryWhite
 import com.example.viewmodel.VocabularyViewModel
 import java.io.File
 import java.io.FileOutputStream
@@ -38,7 +94,6 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DashboardScreen(
     viewModel: VocabularyViewModel,
@@ -47,18 +102,16 @@ fun DashboardScreen(
     val context = LocalContext.current
     val progressList by viewModel.allProgress.collectAsState()
     val learnedCount by viewModel.learnedCount.collectAsState()
-    val bookmarkedCount by viewModel.bookmarkedCount.collectAsState()
     val leaderboard by viewModel.top5Leaderboard.collectAsState()
 
-    val totalWords = 2400
-    val totalUnits = 120
+    val totalWords = 3600
+    val totalUnits = 180
     val passedUnits = progressList.count { it.isPassed }
     val progressPercent = if (totalWords > 0) (learnedCount.toFloat() / totalWords * 100).toInt() else 0
     val progressFraction = if (totalWords > 0) learnedCount.toFloat() / totalWords else 0f
 
     var showExportDialog by remember { mutableStateOf(false) }
     var exportFormatSelected by remember { mutableStateOf("JSON") }
-    var exportedPreviewContent by remember { mutableStateOf<String?>(null) }
 
     fun shareExportedFile(fileName: String, content: String, mimeType: String) {
         try {
@@ -71,7 +124,7 @@ fun DashboardScreen(
                     "${context.packageName}.fileprovider",
                     cacheFile
                 )
-            } catch (e: Exception) {
+            } catch (_: Exception) {
                 Uri.fromFile(cacheFile)
             }
 
@@ -90,31 +143,38 @@ fun DashboardScreen(
     }
 
     Scaffold(
+        containerColor = Color.Transparent,
         topBar = {
-            TopAppBar(
-                title = { Text("Progress Dashboard & Stats") },
+            GlassTopAppBar(
+                title = {
+                    Text(
+                        "Progress Dashboard & Stats",
+                        color = TextPrimaryWhite,
+                        fontWeight = FontWeight.Bold
+                    )
+                },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back", tint = TextPrimaryWhite)
                     }
                 },
                 actions = {
-                    FilledTonalButton(
+                    GlassActionButton(
                         onClick = { showExportDialog = true },
+                        tintColor = GlassCyanFill,
+                        borderColor = GlassCyanBorder,
+                        cornerRadius = 14.dp,
+                        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp),
                         modifier = Modifier
                             .padding(end = 8.dp)
-                            .testTag("export_backup_button"),
-                        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)
+                            .height(38.dp)
+                            .testTag("export_backup_button")
                     ) {
-                        Icon(Icons.Default.Download, contentDescription = null, modifier = Modifier.size(16.dp))
+                        Icon(Icons.Default.Download, contentDescription = null, modifier = Modifier.size(16.dp), tint = GlassCyanAccent)
                         Spacer(modifier = Modifier.width(4.dp))
                         Text("Export Backup", fontWeight = FontWeight.Bold, style = MaterialTheme.typography.labelMedium)
                     }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
-                )
+                }
             )
         }
     ) { padding ->
@@ -126,17 +186,17 @@ fun DashboardScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp),
             contentPadding = PaddingValues(top = 16.dp, bottom = 32.dp)
         ) {
-            // Daily Streak Counter Card with Motivation Badge
+            // Daily Streak Counter Card (Tinted Amber Glass)
             item {
                 val streak by viewModel.dailyStreak.collectAsState()
                 val (badgeTitle, badgeMsg) = com.example.util.StreakManager.getMotivationBadge(streak)
 
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .shadow(4.dp, RoundedCornerShape(20.dp)),
-                    shape = RoundedCornerShape(20.dp),
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFFFEF3C7))
+                GlassCard(
+                    tier = GlassTier.TIER_2,
+                    cornerRadius = 20.dp,
+                    tintColor = GlassAmberFill,
+                    borderColor = GlassAmberBorder,
+                    modifier = Modifier.fillMaxWidth()
                 ) {
                     Row(
                         modifier = Modifier
@@ -144,14 +204,15 @@ fun DashboardScreen(
                             .padding(20.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Surface(
-                            shape = CircleShape,
-                            color = Color(0xFFF59E0B),
-                            modifier = Modifier.size(54.dp)
+                        GlassSurfaceBox(
+                            tier = GlassTier.TIER_3,
+                            cornerRadius = 27.dp,
+                            tintColor = GlassAmberFill,
+                            borderColor = GlassAmberBorder,
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier.size(54.dp).clip(CircleShape)
                         ) {
-                            Box(contentAlignment = Alignment.Center) {
-                                Text("🔥", fontSize = 28.sp)
-                            }
+                            Text("🔥", fontSize = 26.sp)
                         }
                         Spacer(modifier = Modifier.width(16.dp))
                         Column(modifier = Modifier.weight(1f)) {
@@ -159,18 +220,19 @@ fun DashboardScreen(
                                 Text(
                                     text = "$streak Day Streak!",
                                     style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.ExtraBold),
-                                    color = Color(0xFF92400E)
+                                    color = GlassAmberAccent
                                 )
                                 Spacer(modifier = Modifier.width(8.dp))
-                                Surface(
-                                    shape = RoundedCornerShape(6.dp),
-                                    color = Color(0xFFD97706)
+                                GlassPill(
+                                    tintColor = GlassAmberFill,
+                                    borderColor = GlassAmberBorder,
+                                    shape = RoundedCornerShape(8.dp)
                                 ) {
                                     Text(
                                         text = badgeTitle,
                                         style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
-                                        color = Color.White,
-                                        modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+                                        color = TextPrimaryWhite,
+                                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp)
                                     )
                                 }
                             }
@@ -178,7 +240,7 @@ fun DashboardScreen(
                             Text(
                                 text = badgeMsg,
                                 style = MaterialTheme.typography.bodySmall,
-                                color = Color(0xFF78350F)
+                                color = TextBodyTranslucent
                             )
                         }
                     }
@@ -187,22 +249,30 @@ fun DashboardScreen(
 
             // Mastery Progress Dashboard
             item {
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(20.dp),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+                GlassCard(
+                    tier = GlassTier.TIER_2,
+                    cornerRadius = 20.dp,
+                    modifier = Modifier.fillMaxWidth()
                 ) {
                     Column(modifier = Modifier.padding(20.dp)) {
-                        Text("Mastery Progress", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-                        Spacer(modifier = Modifier.height(8.dp))
-                        LinearProgressIndicator(
-                            progress = { progressFraction },
-                            modifier = Modifier.fillMaxWidth().height(12.dp).clip(RoundedCornerShape(6.dp)),
-                            color = MaterialTheme.colorScheme.primary,
-                            trackColor = MaterialTheme.colorScheme.surface
+                        Text(
+                            "Mastery Progress",
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold,
+                            color = TextPrimaryWhite
+                        )
+                        Spacer(modifier = Modifier.height(10.dp))
+                        GlassLinearProgress(
+                            progress = progressFraction,
+                            modifier = Modifier.fillMaxWidth(),
+                            height = 12.dp
                         )
                         Spacer(modifier = Modifier.height(8.dp))
-                        Text("$progressPercent% of 4000 words mastered", style = MaterialTheme.typography.bodyMedium)
+                        Text(
+                            "$progressPercent% of $totalWords words mastered",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = TextBodyTranslucent
+                        )
                     }
                 }
             }
@@ -213,40 +283,52 @@ fun DashboardScreen(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                    Card(
-                        modifier = Modifier.weight(1f),
-                        shape = RoundedCornerShape(16.dp),
-                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
+                    GlassCard(
+                        tier = GlassTier.TIER_2,
+                        cornerRadius = 18.dp,
+                        tintColor = GlassCyanFill,
+                        borderColor = GlassCyanBorder,
+                        modifier = Modifier.weight(1f)
                     ) {
                         Column(modifier = Modifier.padding(16.dp)) {
-                            Text("Words Mastered", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onPrimaryContainer)
+                            Text("Words Mastered", style = MaterialTheme.typography.labelMedium, color = TextBodyTranslucent)
                             Spacer(modifier = Modifier.height(4.dp))
-                            Text("$learnedCount", style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold), color = MaterialTheme.colorScheme.primary)
-                            Text("of $totalWords total", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.8f))
+                            Text(
+                                "$learnedCount",
+                                style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold),
+                                color = GlassCyanAccent
+                            )
+                            Text("of $totalWords total", style = MaterialTheme.typography.bodySmall, color = TextMetaTranslucent)
                         }
                     }
 
-                    Card(
-                        modifier = Modifier.weight(1f),
-                        shape = RoundedCornerShape(16.dp),
-                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)
+                    GlassCard(
+                        tier = GlassTier.TIER_2,
+                        cornerRadius = 18.dp,
+                        tintColor = GlassVioletFill,
+                        borderColor = GlassVioletBorder,
+                        modifier = Modifier.weight(1f)
                     ) {
                         Column(modifier = Modifier.padding(16.dp)) {
-                            Text("Units Completed", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSecondaryContainer)
+                            Text("Units Completed", style = MaterialTheme.typography.labelMedium, color = TextBodyTranslucent)
                             Spacer(modifier = Modifier.height(4.dp))
-                            Text("$passedUnits", style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold), color = MaterialTheme.colorScheme.secondary)
-                            Text("of $totalUnits units", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.8f))
+                            Text(
+                                "$passedUnits",
+                                style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold),
+                                color = GlassVioletAccent
+                            )
+                            Text("of $totalUnits units", style = MaterialTheme.typography.bodySmall, color = TextMetaTranslucent)
                         }
                     }
                 }
             }
 
-            // Pie / Circular Chart Card
+            // Circular Glass Chart Card
             item {
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(20.dp),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+                GlassCard(
+                    tier = GlassTier.TIER_2,
+                    cornerRadius = 20.dp,
+                    modifier = Modifier.fillMaxWidth()
                 ) {
                     Column(
                         modifier = Modifier
@@ -257,6 +339,7 @@ fun DashboardScreen(
                         Text(
                             "Overall Vocabulary Mastery",
                             style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                            color = TextPrimaryWhite,
                             modifier = Modifier.fillMaxWidth()
                         )
                         Spacer(modifier = Modifier.height(20.dp))
@@ -268,19 +351,17 @@ fun DashboardScreen(
                             )
 
                             Canvas(modifier = Modifier.size(160.dp)) {
-                                // Background circle (unlearned)
                                 drawArc(
-                                    color = Color(0xFFE2E8F0),
+                                    color = GlassTier1Border,
                                     startAngle = -90f,
                                     sweepAngle = 360f,
                                     useCenter = false,
                                     style = Stroke(width = 32f, cap = StrokeCap.Round)
                                 )
-                                // Foreground arc (learned)
                                 if (animatedAngle > 0f) {
                                     drawArc(
                                         brush = Brush.sweepGradient(
-                                            listOf(Color(0xFF2563EB), Color(0xFF10B981), Color(0xFF2563EB))
+                                            listOf(GlassCyanAccent, GlassEmeraldAccent, GlassVioletAccent, GlassCyanAccent)
                                         ),
                                         startAngle = -90f,
                                         sweepAngle = animatedAngle,
@@ -294,12 +375,12 @@ fun DashboardScreen(
                                 Text(
                                     text = "$progressPercent%",
                                     style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.ExtraBold),
-                                    color = MaterialTheme.colorScheme.primary
+                                    color = GlassCyanAccent
                                 )
                                 Text(
                                     text = "Learned",
                                     style = MaterialTheme.typography.labelSmall,
-                                    color = MaterialTheme.colorScheme.outline
+                                    color = TextMetaTranslucent
                                 )
                             }
                         }
@@ -311,14 +392,24 @@ fun DashboardScreen(
                             horizontalArrangement = Arrangement.SpaceEvenly
                         ) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
-                                Box(modifier = Modifier.size(12.dp).background(Color(0xFF10B981), CircleShape))
+                                Box(
+                                    modifier = Modifier
+                                        .size(12.dp)
+                                        .background(GlassEmeraldFill, CircleShape)
+                                        .border(1.5.dp, GlassEmeraldBorder, CircleShape)
+                                )
                                 Spacer(modifier = Modifier.width(6.dp))
-                                Text("Learned ($learnedCount)", style = MaterialTheme.typography.bodySmall)
+                                Text("Learned ($learnedCount)", style = MaterialTheme.typography.bodySmall, color = TextBodyTranslucent)
                             }
                             Row(verticalAlignment = Alignment.CenterVertically) {
-                                Box(modifier = Modifier.size(12.dp).background(Color(0xFFE2E8F0), CircleShape))
+                                Box(
+                                    modifier = Modifier
+                                        .size(12.dp)
+                                        .background(GlassTier3Fill, CircleShape)
+                                        .border(1.5.dp, GlassTier3Border, CircleShape)
+                                )
                                 Spacer(modifier = Modifier.width(6.dp))
-                                Text("Remaining (${totalWords - learnedCount})", style = MaterialTheme.typography.bodySmall)
+                                Text("Remaining (${totalWords - learnedCount})", style = MaterialTheme.typography.bodySmall, color = TextMetaTranslucent)
                             }
                         }
                     }
@@ -327,42 +418,54 @@ fun DashboardScreen(
 
             // Book Completion Bar Chart
             item {
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(20.dp),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+                GlassCard(
+                    tier = GlassTier.TIER_2,
+                    cornerRadius = 20.dp,
+                    modifier = Modifier.fillMaxWidth()
                 ) {
                     Column(modifier = Modifier.padding(20.dp)) {
                         Text(
                             "Completion by Book (Units Passed)",
-                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
+                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                            color = TextPrimaryWhite
                         )
                         Spacer(modifier = Modifier.height(16.dp))
 
-                        for (bookNum in 1..4) {
+                        for (bookNum in 1..6) {
                             val unitsInBook = progressList.filter { it.bookNumber == bookNum }
                             val passedInBook = unitsInBook.count { it.isPassed }
                             val frac = if (unitsInBook.isNotEmpty()) passedInBook.toFloat() / 30f else 0f
+                            val accent = when (bookNum) {
+                                1 -> GlassRoyalBlueAccent
+                                2 -> GlassCyanAccent
+                                3 -> GlassVioletAccent
+                                4 -> GlassEmeraldAccent
+                                5 -> GlassAmberAccent
+                                else -> GlassPinkAccent
+                            }
 
                             Column(modifier = Modifier.fillMaxWidth().padding(vertical = 6.dp)) {
                                 Row(
                                     modifier = Modifier.fillMaxWidth(),
                                     horizontalArrangement = Arrangement.SpaceBetween
                                 ) {
-                                    Text("Essential English Words $bookNum", style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.SemiBold))
-                                    Text("$passedInBook / 30 units", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.primary)
+                                    Text(
+                                        "Essential English Words $bookNum",
+                                        style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.SemiBold),
+                                        color = TextPrimaryWhite
+                                    )
+                                    Text(
+                                        "$passedInBook / 30 units",
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = accent
+                                    )
                                 }
                                 Spacer(modifier = Modifier.height(6.dp))
-                                LinearProgressIndicator(
-                                    progress = { frac },
-                                    modifier = Modifier.fillMaxWidth().height(8.dp).clip(RoundedCornerShape(4.dp)),
-                                    color = when (bookNum) {
-                                        1 -> Color(0xFF2563EB)
-                                        2 -> Color(0xFF7C3AED)
-                                        3 -> Color(0xFF0D9488)
-                                        else -> Color(0xFFEA580C)
-                                    },
-                                    trackColor = MaterialTheme.colorScheme.surfaceVariant
+                                GlassLinearProgress(
+                                    progress = frac,
+                                    accentColors = listOf(accent, GlassCyanAccent),
+                                    modifier = Modifier.fillMaxWidth(),
+                                    height = 8.dp
                                 )
                             }
                         }
@@ -372,12 +475,12 @@ fun DashboardScreen(
 
             // Local Leaderboard Section
             item {
-                Card(
+                GlassCard(
+                    tier = GlassTier.TIER_2,
+                    cornerRadius = 20.dp,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .testTag("top_5_leaderboard_card"),
-                    shape = RoundedCornerShape(20.dp),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+                        .testTag("top_5_leaderboard_card")
                 ) {
                     Column(modifier = Modifier.padding(20.dp)) {
                         Row(
@@ -386,21 +489,23 @@ fun DashboardScreen(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
-                                Icon(Icons.Default.EmojiEvents, contentDescription = null, tint = Color(0xFFEAB308))
+                                Icon(Icons.Default.EmojiEvents, contentDescription = null, tint = GlassAmberAccent)
                                 Spacer(modifier = Modifier.width(8.dp))
                                 Text(
                                     "Top 5 Quiz Champions",
-                                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
+                                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                                    color = TextPrimaryWhite
                                 )
                             }
-                            Surface(
-                                shape = RoundedCornerShape(12.dp),
-                                color = MaterialTheme.colorScheme.primaryContainer
+                            GlassPill(
+                                tintColor = GlassCyanFill,
+                                borderColor = GlassCyanBorder,
+                                shape = RoundedCornerShape(12.dp)
                             ) {
                                 Text(
                                     "Top 5 Users",
                                     style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
-                                    color = MaterialTheme.colorScheme.onPrimaryContainer,
+                                    color = GlassCyanAccent,
                                     modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
                                 )
                             }
@@ -418,7 +523,7 @@ fun DashboardScreen(
                                 Text(
                                     "No quizzes completed yet.\nFinish any Unit Quiz to record your score here!",
                                     style = MaterialTheme.typography.bodyMedium,
-                                    color = MaterialTheme.colorScheme.outline,
+                                    color = TextMetaTranslucent,
                                     textAlign = TextAlign.Center
                                 )
                             }
@@ -432,38 +537,47 @@ fun DashboardScreen(
                                 }
                                 val dateStr = SimpleDateFormat("MMM d, HH:mm", Locale.getDefault()).format(Date(entry.timestamp))
 
-                                Row(
+                                GlassSurfaceBox(
+                                    tier = GlassTier.TIER_3,
+                                    cornerRadius = 12.dp,
+                                    tintColor = if (index < 3) GlassTier3Fill else GlassTier1Fill,
+                                    borderColor = if (index < 3) GlassTier3Border else GlassTier1Border,
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .padding(vertical = 6.dp)
-                                        .clip(RoundedCornerShape(10.dp))
-                                        .background(if (index < 3) MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f) else Color.Transparent)
-                                        .padding(horizontal = 10.dp, vertical = 8.dp),
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    horizontalArrangement = Arrangement.SpaceBetween
+                                        .padding(vertical = 4.dp)
                                 ) {
-                                    Row(verticalAlignment = Alignment.CenterVertically) {
-                                        Text(medal, style = MaterialTheme.typography.titleMedium)
-                                        Spacer(modifier = Modifier.width(10.dp))
-                                        Column {
-                                            Text(
-                                                "${entry.userName} • Book ${entry.bookNumber} Unit ${entry.unitNumber}",
-                                                style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold)
-                                            )
-                                            Text(dateStr, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.outline)
-                                        }
-                                    }
-
-                                    Surface(
-                                        shape = RoundedCornerShape(8.dp),
-                                        color = if (entry.score >= 8) Color(0xFF10B981) else Color(0xFF3B82F6)
+                                    Row(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(horizontal = 12.dp, vertical = 10.dp),
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        horizontalArrangement = Arrangement.SpaceBetween
                                     ) {
-                                        Text(
-                                            "${entry.score}/${entry.totalQuestions} pts",
-                                            style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
-                                            color = Color.White,
-                                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
-                                        )
+                                        Row(verticalAlignment = Alignment.CenterVertically) {
+                                            Text(medal, style = MaterialTheme.typography.titleMedium)
+                                            Spacer(modifier = Modifier.width(10.dp))
+                                            Column {
+                                                Text(
+                                                    "${entry.userName} • Book ${entry.bookNumber} Unit ${entry.unitNumber}",
+                                                    style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
+                                                    color = TextPrimaryWhite
+                                                )
+                                                Text(dateStr, style = MaterialTheme.typography.labelSmall, color = TextMetaTranslucent)
+                                            }
+                                        }
+
+                                        GlassPill(
+                                            tintColor = if (entry.score >= 8) GlassEmeraldFill else GlassRoyalBlueFill,
+                                            borderColor = if (entry.score >= 8) GlassEmeraldBorder else GlassRoyalBlueBorder,
+                                            shape = RoundedCornerShape(8.dp)
+                                        ) {
+                                            Text(
+                                                "${entry.score}/${entry.totalQuestions} pts",
+                                                style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
+                                                color = if (entry.score >= 8) GlassEmeraldAccent else GlassRoyalBlueAccent,
+                                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                                            )
+                                        }
                                     }
                                 }
                             }
@@ -474,15 +588,14 @@ fun DashboardScreen(
         }
     }
 
-    // Export Dialog
     if (showExportDialog) {
-        AlertDialog(
+        GlassModalDialog(
             onDismissRequest = { showExportDialog = false },
             title = {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(Icons.Default.CloudDownload, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+                    Icon(Icons.Default.CloudDownload, contentDescription = null, tint = GlassCyanAccent)
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text("Export Progress Backup")
+                    Text("Export Progress Backup", style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold))
                 }
             },
             text = {
@@ -492,24 +605,28 @@ fun DashboardScreen(
                         style = MaterialTheme.typography.bodyMedium
                     )
                     Spacer(modifier = Modifier.height(16.dp))
-                    Text("Select format:", style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold))
+                    Text("Select format:", style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold), color = TextPrimaryWhite)
                     Spacer(modifier = Modifier.height(8.dp))
                     Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                         FilterChip(
                             selected = exportFormatSelected == "JSON",
                             onClick = { exportFormatSelected = "JSON" },
-                            label = { Text("JSON (.json)") }
+                            label = { Text("JSON (.json)") },
+                            colors = glassFilterChipColors(),
+                            border = glassFilterChipBorder(exportFormatSelected == "JSON")
                         )
                         FilterChip(
                             selected = exportFormatSelected == "CSV",
                             onClick = { exportFormatSelected = "CSV" },
-                            label = { Text("CSV (.csv)") }
+                            label = { Text("CSV (.csv)") },
+                            colors = glassFilterChipColors(),
+                            border = glassFilterChipBorder(exportFormatSelected == "CSV")
                         )
                     }
                 }
             },
             confirmButton = {
-                Button(
+                GlassActionButton(
                     onClick = {
                         val isJson = exportFormatSelected == "JSON"
                         viewModel.exportBackup(isJson) { content ->
@@ -519,14 +636,18 @@ fun DashboardScreen(
                             shareExportedFile(fileName, content, mime)
                             showExportDialog = false
                         }
-                    }
+                    },
+                    tintColor = GlassCyanFill,
+                    borderColor = GlassCyanBorder,
+                    cornerRadius = 12.dp,
+                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 10.dp)
                 ) {
-                    Text("Export & Save")
+                    Text("Export & Save", fontWeight = FontWeight.Bold)
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showExportDialog = false }) {
-                    Text("Cancel")
+                    Text("Cancel", color = TextBodyTranslucent)
                 }
             }
         )

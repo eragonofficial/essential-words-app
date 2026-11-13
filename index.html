@@ -3,200 +3,340 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Essential English Words - Master 4,000 Essential Vocabulary</title>
+    <title>Essential English Words - Master 3,600+ Essential Vocabulary</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --canvas-bg: linear-gradient(135deg, #060918 0%, #0d1333 50%, #091a2e 100%);
+            --glass-t1: rgba(255, 255, 255, 0.06);
+            --glass-t1-border: rgba(255, 255, 255, 0.16);
+            --glass-t1-highlight: rgba(255, 255, 255, 0.25);
+            --glass-t2: rgba(255, 255, 255, 0.10);
+            --glass-t2-border: rgba(255, 255, 255, 0.24);
+            --glass-t2-highlight: rgba(255, 255, 255, 0.35);
+            --glass-t3: rgba(255, 255, 255, 0.12);
+            --glass-t3-border: rgba(255, 255, 255, 0.22);
+            --text-primary: #ffffff;
+            --text-body: rgba(255, 255, 255, 0.82);
+            --text-meta: rgba(255, 255, 255, 0.58);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--canvas-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .ambient-canvas {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .ambient-orb {
+            position: absolute;
+            border-radius: 9999px;
+            filter: blur(110px);
+            opacity: 0.45;
+            animation: orbFloat 18s ease-in-out infinite alternate;
+        }
+
+        .orb-cyan {
+            width: 34rem;
+            height: 34rem;
+            top: -8rem;
+            left: -6rem;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.72), rgba(56, 189, 248, 0.08));
+        }
+
+        .orb-violet {
+            width: 36rem;
+            height: 36rem;
+            top: 22%;
+            right: -10rem;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.7), rgba(167, 139, 250, 0.08));
+            animation-delay: -6s;
+        }
+
+        .orb-blue {
+            width: 32rem;
+            height: 32rem;
+            bottom: -10rem;
+            left: 25%;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.7), rgba(16, 185, 129, 0.14));
+            animation-delay: -11s;
+        }
+
+        @keyframes orbFloat {
+            0% { transform: translate3d(0, 0, 0) scale(1); }
+            50% { transform: translate3d(32px, -24px, 0) scale(1.06); }
+            100% { transform: translate3d(-24px, 28px, 0) scale(0.96); }
+        }
+
+        .glass-tier-1 {
+            background: var(--glass-t1);
+            backdrop-filter: blur(20px) saturate(160%);
+            -webkit-backdrop-filter: blur(20px) saturate(160%);
+            border: 1px solid var(--glass-t1-border);
+            box-shadow: inset 0 1px 0 var(--glass-t1-highlight), 0 16px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        .glass-tier-2 {
+            background: var(--glass-t2);
+            backdrop-filter: blur(24px) saturate(175%);
+            -webkit-backdrop-filter: blur(24px) saturate(175%);
+            border: 1px solid var(--glass-t2-border);
+            box-shadow: inset 0 1px 0 var(--glass-t2-highlight), 0 20px 48px rgba(0, 0, 0, 0.42);
+        }
+
+        .glass-tier-3 {
+            background: var(--glass-t3);
+            backdrop-filter: blur(14px) saturate(160%);
+            -webkit-backdrop-filter: blur(14px) saturate(160%);
+            border: 1px solid var(--glass-t3-border);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28);
+        }
+
+        .glass-input {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            color: var(--text-primary);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .glass-input:focus {
+            outline: none;
+            border-color: rgba(56, 189, 248, 0.75);
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.22);
+        }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased">
-    <!-- Header / Navbar -->
-    <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-lg sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-3">
-                <div class="bg-white text-blue-600 p-2.5 rounded-xl font-black text-xl shadow">
-                    <i class="fa-solid fa-graduation-cap"></i>
-                </div>
-                <div>
-                    <h1 class="text-xl font-extrabold tracking-tight">Essential English Words</h1>
-                    <p class="text-xs text-blue-200">Android Vocabulary Master & Pronunciation Coach</p>
-                </div>
-            </div>
-            <div class="flex items-center space-x-4">
-                <a href="#books" class="hidden md:inline-block text-sm font-semibold hover:text-blue-200 transition">Books</a>
-                <a href="#features" class="hidden md:inline-block text-sm font-semibold hover:text-blue-200 transition">Features</a>
-                <a href="#api" class="hidden md:inline-block text-sm font-semibold hover:text-blue-200 transition">REST API</a>
-                <a href="#download" class="bg-white text-blue-600 font-bold px-4 py-2 rounded-xl shadow hover:bg-blue-50 transition text-sm">
-                    <i class="fa-solid fa-download mr-1.5"></i> Download App
-                </a>
-            </div>
-        </div>
-    </header>
+<body class="font-sans antialiased">
+    <!-- Fixed Cosmic Ambient Light Orbs -->
+    <div class="ambient-canvas" aria-hidden="true">
+        <div class="ambient-orb orb-cyan"></div>
+        <div class="ambient-orb orb-violet"></div>
+        <div class="ambient-orb orb-blue"></div>
+    </div>
 
-    <!-- Hero Section -->
-    <section class="bg-gradient-to-b from-blue-600 to-indigo-800 text-white py-20 px-4">
-        <div class="max-w-5xl mx-auto text-center space-y-6">
-            <span class="bg-blue-500/40 text-blue-100 text-xs font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-full border border-blue-400/30">
-                ✨ 4 Books • 30 Units • 2,400+ Curated Words
-            </span>
-            <h2 class="text-4xl sm:text-6xl font-black tracking-tight leading-tight">
-                Master English Vocabulary <br class="hidden sm:inline">with Confidence & Audio
-            </h2>
-            <p class="text-lg sm:text-xl text-blue-100 max-w-2xl mx-auto font-normal">
-                An advanced Android app designed to help English learners master essential vocabulary through interactive flashcards, typing quizzes, AI insights, and real-time speech-to-text pronunciation coaching.
-            </p>
-            <div class="flex flex-wrap justify-center gap-4 pt-4">
-                <a href="#download" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-8 py-3.5 rounded-xl shadow-lg transition flex items-center space-x-2 text-base">
-                    <i class="fa-brands fa-android text-xl"></i>
-                    <span>Download Android APK</span>
-                </a>
-                <a href="#api-demo" class="bg-white/10 hover:bg-white/20 text-white border border-white/30 font-semibold px-8 py-3.5 rounded-xl transition flex items-center space-x-2 text-base">
-                    <i class="fa-solid fa-code text-xl"></i>
-                    <span>Test Web API</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- App Features Grid -->
-    <section id="features" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center space-y-3 mb-16">
-            <h3 class="text-xs font-bold uppercase tracking-widest text-blue-600">Powerful Learning Tools</h3>
-            <h2 class="text-3xl font-black text-slate-900">Everything You Need to Fluency</h2>
-            <p class="text-slate-600 max-w-xl mx-auto">Built with modern Jetpack Compose, offline Room caching, Firebase cloud sync, and speech analysis.</p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200/80 hover:shadow-md transition">
-                <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center text-xl font-bold mb-6">
-                    <i class="fa-solid fa-microphone-lines"></i>
+    <div class="relative z-10">
+        <!-- Frosted Header / Navbar -->
+        <header class="glass-tier-1 sticky top-0 z-50 border-x-0 border-t-0">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="glass-tier-3 text-cyan-300 p-2.5 rounded-xl font-black text-xl">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-extrabold tracking-tight text-white">Essential English Words</h1>
+                        <p class="text-xs" style="color: var(--text-meta);">Android Vocabulary Master &amp; Pronunciation Coach</p>
+                    </div>
                 </div>
-                <h4 class="text-lg font-bold text-slate-900 mb-2">Speech-to-Text Pronunciation</h4>
-                <p class="text-slate-600 text-sm leading-relaxed">
-                    Record your voice using the device microphone. The app analyzes your pronunciation and compares it against native audio to give instant accuracy scores.
+                <div class="flex items-center space-x-4">
+                    <a href="#books" class="hidden md:inline-block text-sm font-semibold text-white/80 hover:text-cyan-300 transition">Books</a>
+                    <a href="#features" class="hidden md:inline-block text-sm font-semibold text-white/80 hover:text-cyan-300 transition">Features</a>
+                    <a href="#api-demo" class="hidden md:inline-block text-sm font-semibold text-white/80 hover:text-cyan-300 transition">REST API</a>
+                    <a href="#download" class="glass-tier-3 text-white font-bold px-4 py-2 rounded-xl hover:border-cyan-400/60 transition text-sm">
+                        <i class="fa-solid fa-download mr-1.5 text-cyan-300"></i> Download App
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="py-20 px-4">
+            <div class="max-w-5xl mx-auto glass-tier-2 rounded-3xl p-8 sm:p-14 text-center space-y-6">
+                <span class="inline-block glass-tier-3 text-cyan-200 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full">
+                    ✨ 6 Books • 180 Units • 3,600 Curated Words
+                </span>
+                <h2 class="text-4xl sm:text-6xl font-black tracking-tight leading-tight text-white">
+                    Master English Vocabulary <br class="hidden sm:inline">with Confidence &amp; Audio
+                </h2>
+                <p class="text-lg sm:text-xl max-w-2xl mx-auto font-normal" style="color: var(--text-body);">
+                    An advanced Android app designed to help English learners master essential vocabulary through frosted interactive flashcards, typing quizzes, and real-time speech pronunciation coaching.
                 </p>
-            </div>
-            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200/80 hover:shadow-md transition">
-                <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center text-xl font-bold mb-6">
-                    <i class="fa-solid fa-layer-group"></i>
+                <div class="flex flex-wrap justify-center gap-4 pt-4">
+                    <a href="#download" class="glass-tier-3 border-emerald-400/50 bg-emerald-500/20 hover:bg-emerald-500/30 text-white font-bold px-8 py-3.5 rounded-xl transition flex items-center space-x-2 text-base">
+                        <i class="fa-brands fa-android text-xl text-emerald-300"></i>
+                        <span>Download Android APK</span>
+                    </a>
+                    <a href="#api-demo" class="glass-tier-3 hover:border-cyan-400/50 text-white font-semibold px-8 py-3.5 rounded-xl transition flex items-center space-x-2 text-base">
+                        <i class="fa-solid fa-code text-xl text-cyan-300"></i>
+                        <span>Test Web API</span>
+                    </a>
                 </div>
-                <h4 class="text-lg font-bold text-slate-900 mb-2">Interactive Flashcards & Quizzes</h4>
-                <p class="text-slate-600 text-sm leading-relaxed">
-                    Switch seamlessly between List View, 3D Flashcards with active recall, and Spelling Typing Quizzes with authentic audio success chimes.
-                </p>
             </div>
-            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200/80 hover:shadow-md transition">
-                <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center text-xl font-bold mb-6">
-                    <i class="fa-solid fa-cloud-arrow-down"></i>
-                </div>
-                <h4 class="text-lg font-bold text-slate-900 mb-2">Cloud Sync & Offline Support</h4>
-                <p class="text-slate-600 text-sm leading-relaxed">
-                    Sign in with Google, track your daily streaks, sync progress across devices via Firebase Firestore, and study fully offline anytime.
-                </p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Books Overview Section -->
-    <section id="books" class="bg-slate-100 py-20 px-4">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center space-y-3 mb-16">
-                <h3 class="text-xs font-bold uppercase tracking-widest text-indigo-600">Curated Curriculum</h3>
-                <h2 class="text-3xl font-black text-slate-900">Explore All 4 Books</h2>
-                <p class="text-slate-600 max-w-xl mx-auto">Progressively structured from foundational everyday vocabulary to advanced academic and professional terms.</p>
+        <!-- App Features Grid -->
+        <section id="features" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center space-y-3 mb-14">
+                <h3 class="text-xs font-bold uppercase tracking-widest text-cyan-300">Powerful Learning Tools</h3>
+                <h2 class="text-3xl font-black text-white">Everything You Need to Fluency</h2>
+                <p class="max-w-xl mx-auto" style="color: var(--text-body);">Built with modern Jetpack Compose, offline Room caching, Firebase cloud sync, and UK/US speech synthesis.</p>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col justify-between">
-                    <div>
-                        <span class="bg-blue-100 text-blue-700 text-xs font-bold px-2.5 py-1 rounded-md">Book 1</span>
-                        <h4 class="text-lg font-bold text-slate-900 mt-4 mb-2">Beginner Foundations</h4>
-                        <p class="text-slate-600 text-sm">Essential everyday words, basic nouns, verbs, adjectives, and simple sentence structures.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-tier-2 p-8 rounded-2xl transition hover:border-cyan-400/40">
+                    <div class="w-12 h-12 glass-tier-3 text-cyan-300 rounded-xl flex items-center justify-center text-xl font-bold mb-6">
+                        <i class="fa-solid fa-microphone-lines"></i>
                     </div>
-                    <div class="mt-6 pt-4 border-t border-slate-100 flex justify-between items-center text-xs font-semibold text-slate-500">
-                        <span>30 Units</span>
-                        <span class="text-blue-600">600 Words</span>
-                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">UK &amp; US Pronunciation</h4>
+                    <p class="text-sm leading-relaxed" style="color: var(--text-body);">
+                        Listen to instant British and American pronunciation audio and verify your speaking accuracy against native speech patterns.
+                    </p>
                 </div>
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col justify-between">
-                    <div>
-                        <span class="bg-indigo-100 text-indigo-700 text-xs font-bold px-2.5 py-1 rounded-md">Book 2</span>
-                        <h4 class="text-lg font-bold text-slate-900 mt-4 mb-2">Intermediate Growth</h4>
-                        <p class="text-slate-600 text-sm">Expanding conversational range, descriptive phrases, synonyms, and practical contexts.</p>
+                <div class="glass-tier-2 p-8 rounded-2xl transition hover:border-violet-400/40">
+                    <div class="w-12 h-12 glass-tier-3 text-violet-300 rounded-xl flex items-center justify-center text-xl font-bold mb-6">
+                        <i class="fa-solid fa-layer-group"></i>
                     </div>
-                    <div class="mt-6 pt-4 border-t border-slate-100 flex justify-between items-center text-xs font-semibold text-slate-500">
-                        <span>30 Units</span>
-                        <span class="text-indigo-600">600 Words</span>
-                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">Interactive Flashcards &amp; Quizzes</h4>
+                    <p class="text-sm leading-relaxed" style="color: var(--text-body);">
+                        Switch seamlessly between List View, Active Recall Flashcards, and Typing Quizzes with instant Uzbek and English feedback.
+                    </p>
                 </div>
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col justify-between">
-                    <div>
-                        <span class="bg-violet-100 text-violet-700 text-xs font-bold px-2.5 py-1 rounded-md">Book 3</span>
-                        <h4 class="text-lg font-bold text-slate-900 mt-4 mb-2">Upper Intermediate</h4>
-                        <p class="text-slate-600 text-sm">Abstract concepts, professional terminology, antonyms, and complex sentence examples.</p>
+                <div class="glass-tier-2 p-8 rounded-2xl transition hover:border-emerald-400/40">
+                    <div class="w-12 h-12 glass-tier-3 text-emerald-300 rounded-xl flex items-center justify-center text-xl font-bold mb-6">
+                        <i class="fa-solid fa-cloud-arrow-down"></i>
                     </div>
-                    <div class="mt-6 pt-4 border-t border-slate-100 flex justify-between items-center text-xs font-semibold text-slate-500">
-                        <span>30 Units</span>
-                        <span class="text-violet-600">600 Words</span>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col justify-between">
-                    <div>
-                        <span class="bg-purple-100 text-purple-700 text-xs font-bold px-2.5 py-1 rounded-md">Book 4</span>
-                        <h4 class="text-lg font-bold text-slate-900 mt-4 mb-2">Advanced Mastery</h4>
-                        <p class="text-slate-600 text-sm">Sophisticated academic vocabulary, nuanced definitions, and expert-level idioms.</p>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-slate-100 flex justify-between items-center text-xs font-semibold text-slate-500">
-                        <span>30 Units</span>
-                        <span class="text-purple-600">600 Words</span>
-                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">Global Search &amp; Offline Books</h4>
+                    <p class="text-sm leading-relaxed" style="color: var(--text-body);">
+                        Look up any English or Uzbek word in the bidirectional Global Dictionary alongside all 6 Essential English Words textbooks offline.
+                    </p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- API Demo Section -->
-    <section id="api-demo" class="py-20 max-w-4xl mx-auto px-4">
-        <div class="bg-slate-900 text-white p-8 sm:p-12 rounded-3xl shadow-xl space-y-6">
-            <div class="flex items-center space-x-3">
-                <div class="bg-blue-600 text-white p-2 rounded-lg">
-                    <i class="fa-solid fa-terminal"></i>
+        <!-- Books Overview Section -->
+        <section id="books" class="py-16 px-4">
+            <div class="max-w-7xl mx-auto glass-tier-1 rounded-3xl p-8 sm:p-12">
+                <div class="text-center space-y-3 mb-12">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-violet-300">Curated Curriculum</h3>
+                    <h2 class="text-3xl font-black text-white">Explore All 6 Books</h2>
+                    <p class="max-w-xl mx-auto" style="color: var(--text-body);">Progressively structured from foundational everyday vocabulary to advanced academic and professional terms.</p>
                 </div>
-                <div>
-                    <h3 class="text-xl font-bold">Test REST API Endpoint</h3>
-                    <p class="text-xs text-slate-400">Search the 2,400+ words dataset via Vercel serverless API</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="glass-tier-2 p-6 rounded-2xl flex flex-col justify-between">
+                        <div>
+                            <h4 class="text-lg font-bold text-white mb-2">Book 1: Essential English Words 1</h4>
+                            <p class="text-sm" style="color: var(--text-body);">Unit-based vocabulary study covering foundational everyday words and expressions.</p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-white/15 flex justify-between items-center text-xs font-semibold" style="color: var(--text-meta);">
+                            <span>30 Units</span>
+                            <span class="glass-tier-3 px-2.5 py-1 rounded-lg text-cyan-300">600 Words</span>
+                        </div>
+                    </div>
+                    <div class="glass-tier-2 p-6 rounded-2xl flex flex-col justify-between">
+                        <div>
+                            <h4 class="text-lg font-bold text-white mb-2">Book 2: Essential English Words 2</h4>
+                            <p class="text-sm" style="color: var(--text-body);">Unit-based vocabulary study expanding conversational range and descriptive phrases.</p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-white/15 flex justify-between items-center text-xs font-semibold" style="color: var(--text-meta);">
+                            <span>30 Units</span>
+                            <span class="glass-tier-3 px-2.5 py-1 rounded-lg text-sky-300">600 Words</span>
+                        </div>
+                    </div>
+                    <div class="glass-tier-2 p-6 rounded-2xl flex flex-col justify-between">
+                        <div>
+                            <h4 class="text-lg font-bold text-white mb-2">Book 3: Essential English Words 3</h4>
+                            <p class="text-sm" style="color: var(--text-body);">Unit-based vocabulary study featuring abstract concepts, synonyms, and antonyms.</p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-white/15 flex justify-between items-center text-xs font-semibold" style="color: var(--text-meta);">
+                            <span>30 Units</span>
+                            <span class="glass-tier-3 px-2.5 py-1 rounded-lg text-violet-300">600 Words</span>
+                        </div>
+                    </div>
+                    <div class="glass-tier-2 p-6 rounded-2xl flex flex-col justify-between">
+                        <div>
+                            <h4 class="text-lg font-bold text-white mb-2">Book 4: Essential English Words 4</h4>
+                            <p class="text-sm" style="color: var(--text-body);">Unit-based vocabulary study focusing on academic and professional communication.</p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-white/15 flex justify-between items-center text-xs font-semibold" style="color: var(--text-meta);">
+                            <span>30 Units</span>
+                            <span class="glass-tier-3 px-2.5 py-1 rounded-lg text-emerald-300">600 Words</span>
+                        </div>
+                    </div>
+                    <div class="glass-tier-2 p-6 rounded-2xl flex flex-col justify-between">
+                        <div>
+                            <h4 class="text-lg font-bold text-white mb-2">Book 5: Essential English Words 5</h4>
+                            <p class="text-sm" style="color: var(--text-body);">Upper-intermediate vocabulary for nuanced essays, idioms, and analytical reading.</p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-white/15 flex justify-between items-center text-xs font-semibold" style="color: var(--text-meta);">
+                            <span>30 Units</span>
+                            <span class="glass-tier-3 px-2.5 py-1 rounded-lg text-amber-300">600 Words</span>
+                        </div>
+                    </div>
+                    <div class="glass-tier-2 p-6 rounded-2xl flex flex-col justify-between">
+                        <div>
+                            <h4 class="text-lg font-bold text-white mb-2">Book 6: Essential English Words 6</h4>
+                            <p class="text-sm" style="color: var(--text-body);">Advanced mastery vocabulary covering sophisticated rhetoric, science, and literature.</p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-white/15 flex justify-between items-center text-xs font-semibold" style="color: var(--text-meta);">
+                            <span>30 Units</span>
+                            <span class="glass-tier-3 px-2.5 py-1 rounded-lg text-pink-300">600 Words</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="flex gap-2">
-                <input type="text" id="apiSearchInput" placeholder="Try searching 'adventure', 'brave', 'journey'..." class="flex-1 bg-slate-800 text-white px-4 py-3 rounded-xl border border-slate-700 focus:outline-none focus:border-blue-500 text-sm">
-                <button onclick="testApiSearch()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-xl transition text-sm">
-                    Search API
-                </button>
-            </div>
-            <div id="apiResults" class="bg-slate-800/80 p-4 rounded-xl border border-slate-700/50 text-xs font-mono text-slate-300 max-h-60 overflow-y-auto">
-                // Results will appear here... Type a word above and click Search API.
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Download Section -->
-    <section id="download" class="py-20 bg-gradient-to-r from-blue-600 to-indigo-700 text-white text-center px-4">
-        <div class="max-w-3xl mx-auto space-y-6">
-            <h2 class="text-3xl sm:text-4xl font-black">Ready to Start Learning?</h2>
-            <p class="text-blue-100 text-base max-w-xl mx-auto">Download the Android app APK or access the vocabulary database directly through our open API.</p>
-            <div class="flex flex-wrap justify-center gap-4 pt-4">
-                <a href="/public/words.json" download class="bg-white text-blue-700 hover:bg-blue-50 font-bold px-8 py-3.5 rounded-xl shadow transition flex items-center space-x-2 text-sm">
-                    <i class="fa-solid fa-file-arrow-down"></i>
-                    <span>Download words.json</span>
-                </a>
-                <a href="https://github.com" target="_blank" class="bg-slate-900/60 hover:bg-slate-900 text-white border border-white/20 font-semibold px-8 py-3.5 rounded-xl transition flex items-center space-x-2 text-sm">
-                    <i class="fa-brands fa-github text-lg"></i>
-                    <span>View GitHub Repository</span>
-                </a>
+        <!-- API Demo Section -->
+        <section id="api-demo" class="py-16 max-w-4xl mx-auto px-4">
+            <div class="glass-tier-2 p-8 sm:p-12 rounded-3xl space-y-6">
+                <div class="flex items-center space-x-3">
+                    <div class="glass-tier-3 text-cyan-300 p-2.5 rounded-xl">
+                        <i class="fa-solid fa-terminal"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white">Test REST API Endpoint</h3>
+                        <p class="text-xs" style="color: var(--text-meta);">Search the vocabulary dataset via serverless REST API</p>
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <input type="text" id="apiSearchInput" placeholder="Try searching 'adventure', 'brave', 'journey'..." class="flex-1 glass-input px-4 py-3 rounded-xl text-sm placeholder:text-white/50">
+                    <button onclick="testApiSearch()" class="glass-tier-3 border-cyan-400/50 bg-cyan-500/20 hover:bg-cyan-500/30 text-white font-semibold px-6 py-3 rounded-xl transition text-sm">
+                        Search API
+                    </button>
+                </div>
+                <div id="apiResults" class="glass-tier-1 p-4 rounded-xl text-xs font-mono max-h-60 overflow-y-auto" style="color: var(--text-body);">
+                    // Results will appear here... Type a word above and click Search API.
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-400 py-12 px-4 border-t border-slate-800 text-center text-xs space-y-4">
-        <p>&copy; 2026 Essential English Words App. All rights reserved. Powered by Jetpack Compose & Vercel Serverless.</p>
-    </footer>
+        <!-- Download Section -->
+        <section id="download" class="py-16 px-4">
+            <div class="max-w-4xl mx-auto glass-tier-2 rounded-3xl p-8 sm:p-12 text-center space-y-6">
+                <h2 class="text-3xl sm:text-4xl font-black text-white">Ready to Start Learning?</h2>
+                <p class="text-base max-w-xl mx-auto" style="color: var(--text-body);">Download the Android app APK or access the vocabulary database directly through our open API.</p>
+                <div class="flex flex-wrap justify-center gap-4 pt-4">
+                    <a href="/public/words.json" download class="glass-tier-3 border-cyan-400/50 bg-cyan-500/20 hover:bg-cyan-500/30 text-white font-bold px-8 py-3.5 rounded-xl transition flex items-center space-x-2 text-sm">
+                        <i class="fa-solid fa-file-arrow-down text-cyan-300"></i>
+                        <span>Download words.json</span>
+                    </a>
+                    <a href="https://github.com" target="_blank" class="glass-tier-3 hover:border-violet-400/50 text-white font-semibold px-8 py-3.5 rounded-xl transition flex items-center space-x-2 text-sm">
+                        <i class="fa-brands fa-github text-lg text-violet-300"></i>
+                        <span>View GitHub Repository</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="glass-tier-1 border-x-0 border-b-0 py-10 px-4 text-center text-xs space-y-4" style="color: var(--text-meta);">
+            <p>&copy; 2026 Essential English Words App. All rights reserved. Powered by Jetpack Compose &amp; Cosmic Glassmorphism.</p>
+        </footer>
+    </div>
 
     <script>
         async function testApiSearch() {

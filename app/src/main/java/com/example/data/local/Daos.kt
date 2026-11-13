@@ -35,6 +35,15 @@ interface WordDao {
     @Query("SELECT * FROM words WHERE isLearned = 1 ORDER BY bookNumber, unitNumber, id ASC")
     fun getLearnedWords(): Flow<List<WordEntity>>
 
+    @Query("SELECT * FROM words WHERE nextReviewTimestamp <= :currentTime ORDER BY nextReviewTimestamp ASC")
+    fun getDueWords(currentTime: Long = System.currentTimeMillis()): Flow<List<WordEntity>>
+
+    @Query("SELECT COUNT(*) FROM words WHERE nextReviewTimestamp <= :currentTime")
+    fun getDueWordsCount(currentTime: Long = System.currentTimeMillis()): Flow<Int>
+
+    @Query("UPDATE words SET nextReviewTimestamp = :nextReview, repetitionIntervalDays = :interval, repetitionCount = :repCount, easeFactor = :ease WHERE id = :wordId")
+    suspend fun updateSpacedRepetition(wordId: Long, nextReview: Long, interval: Int, repCount: Int, ease: Float)
+
     @Query("SELECT COUNT(*) FROM words WHERE isLearned = 1")
     fun getLearnedCount(): Flow<Int>
 
@@ -55,6 +64,15 @@ interface WordDao {
 
     @Query("SELECT COUNT(*) FROM words")
     suspend fun getWordCount(): Int
+
+    @Query("SELECT id FROM words")
+    suspend fun getAllWordIds(): List<Long>
+
+    @Query("SELECT COUNT(*) FROM words WHERE partOfSpeech = ''")
+    suspend fun getWordsMissingPartOfSpeechCount(): Int
+
+    @Query("UPDATE words SET partOfSpeech = :partOfSpeech WHERE id = :wordId")
+    suspend fun updatePartOfSpeech(wordId: Long, partOfSpeech: String)
 
     @Query("DELETE FROM words")
     suspend fun deleteAllWords()

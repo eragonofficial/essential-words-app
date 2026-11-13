@@ -11,6 +11,7 @@ import com.example.data.local.WordEntity
 import com.example.util.GeminiHelper
 import com.example.util.StreakManager
 import com.example.util.UnitTitlesHelper
+import androidx.room.withTransaction
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
@@ -28,11 +29,11 @@ class VocabularyRepository(private val context: Context) {
 
     suspend fun initializeDatabaseIfNeeded() = withContext(Dispatchers.IO) {
         try {
-            // Seed Unit Progress for all 4 books (30 units each = 120 units)
+            // Seed Unit Progress for all 6 books (30 units each = 180 units)
             val currentCount = unitProgressDao.getCount()
-            if (currentCount < 120) {
+            if (currentCount < 180) {
                 val initialUnits = mutableListOf<UnitProgressEntity>()
-                for (book in 1..4) {
+                for (book in 1..6) {
                     for (unit in 1..30) {
                         val title = UnitTitlesHelper.getTitle(book, unit)
                         initialUnits.add(
@@ -67,15 +68,27 @@ class VocabularyRepository(private val context: Context) {
                 leaderboardDao.insertScores(initialLeaderboard)
             }
 
-            // Seed Words from assets if words table is empty
-            if (wordDao.getWordCount() == 0) {
+            // Seed missing Words or backfill missing partOfSpeech from assets
+            val needsSeed = wordDao.getWordCount() < 3600
+            val needsPosBackfill = wordDao.getWordsMissingPartOfSpeechCount() > 0
+            if (needsSeed || needsPosBackfill) {
+                val existingIds = wordDao.getAllWordIds().toHashSet()
                 val jsonString = context.assets.open("words_data.json").bufferedReader().use { it.readText() }
                 val jsonArray = JSONArray(jsonString)
                 val wordsList = mutableListOf<WordEntity>()
+                val posBackfillPairs = mutableListOf<Pair<Long, String>>()
 
                 for (i in 0 until jsonArray.length()) {
                     val obj = jsonArray.getJSONObject(i)
                     val id = obj.optLong("id", i + 1L)
+                    val partOfSpeech = obj.optString("partOfSpeech", "")
+                    if (existingIds.contains(id)) {
+                        if (needsPosBackfill && partOfSpeech.isNotBlank()) {
+                            posBackfillPairs.add(id to partOfSpeech)
+                        }
+                        continue
+                    }
+
                     val bookNum = obj.optInt("bookNumber", 1)
                     val unitNum = obj.optInt("unitNumber", 1)
                     val word = obj.optString("word", "")
@@ -114,6 +127,7 @@ class VocabularyRepository(private val context: Context) {
                             unitNumber = unitNum,
                             word = word,
                             phonetic = phonetic,
+                            partOfSpeech = partOfSpeech,
                             englishDefinition = definition,
                             englishExample = exEn,
                             definition = definition,
@@ -130,7 +144,16 @@ class VocabularyRepository(private val context: Context) {
                         )
                     )
                 }
-                wordDao.insertWords(wordsList)
+                database.withTransaction {
+                    if (wordsList.isNotEmpty()) {
+                        wordDao.insertWords(wordsList)
+                    }
+                    if (posBackfillPairs.isNotEmpty()) {
+                        for ((wordId, pos) in posBackfillPairs) {
+                            wordDao.updatePartOfSpeech(wordId, pos)
+                        }
+                    }
+                }
             }
         } catch (e: Exception) {
             Log.e("VocabRepo", "Error initializing vocabulary database", e)
@@ -196,8 +219,97 @@ class VocabularyRepository(private val context: Context) {
         return unitProgressDao.getProgressForBook(bookNum)
     }
 
-    fun searchWords(query: String): Flow<List<WordEntity>> {
-        return wordDao.searchWords(query)
+    enum class LocalBookSearchLanguage {
+        ALL,
+        ENGLISH,
+        UZBEK
+    }
+
+    fun searchWords(
+        query: String,
+        language: LocalBookSearchLanguage = LocalBookSearchLanguage.ALL
+    ): Flow<List<WordEntity>> {
+        val clean = normalizeSearchText(query)
+        val cleanNoApos = stripApostrophes(clean)
+        if (clean.isBlank()) {
+            return kotlinx.coroutines.flow.flowOf(emptyList())
+        }
+        return kotlinx.coroutines.flow.flow {
+            wordDao.getAllWords().collect { allWords ->
+                val scored = withContext(Dispatchers.Default) {
+                    allWords.mapNotNull { entity ->
+                        val rank = scoreWordMatch(entity, clean, cleanNoApos, language)
+                        if (rank >= 0) rank to entity else null
+                    }.sortedWith(
+                        compareBy<Pair<Int, WordEntity>> { it.first }
+                            .thenBy { it.second.bookNumber }
+                            .thenBy { it.second.unitNumber }
+                            .thenBy { it.second.id }
+                    ).map { it.second }
+                }
+                emit(scored)
+            }
+        }
+    }
+
+    private fun scoreWordMatch(
+        entity: WordEntity,
+        clean: String,
+        cleanNoApos: String,
+        language: LocalBookSearchLanguage
+    ): Int {
+        val wordNorm = normalizeSearchText(entity.word)
+        val uzTrNorm = normalizeSearchText(entity.uzbekTranslation)
+        val uzTrNoApos = stripApostrophes(uzTrNorm)
+        val uzTokens = uzTrNorm.split(",", ";", "/").map { normalizeSearchText(it) }.filter { it.isNotBlank() }
+        val uzTokensNoApos = uzTokens.map { stripApostrophes(it) }
+
+        return when (language) {
+            LocalBookSearchLanguage.ENGLISH -> {
+                when {
+                    wordNorm == clean -> 0
+                    wordNorm.startsWith(clean) -> 1
+                    wordNorm.contains(clean) -> 2
+                    else -> -1
+                }
+            }
+            LocalBookSearchLanguage.UZBEK -> {
+                when {
+                    uzTokens.any { it == clean } || (cleanNoApos.isNotBlank() && uzTokensNoApos.any { it == cleanNoApos }) -> 0
+                    uzTokens.any { it.startsWith(clean) } || (cleanNoApos.isNotBlank() && uzTokensNoApos.any { it.startsWith(cleanNoApos) }) -> 1
+                    uzTrNorm.contains(clean) || (cleanNoApos.isNotBlank() && uzTrNoApos.contains(cleanNoApos)) -> 2
+                    else -> -1
+                }
+            }
+            else -> {
+                val enRank = when {
+                    wordNorm == clean -> 0
+                    wordNorm.startsWith(clean) -> 2
+                    else -> -1
+                }
+                val uzRank = when {
+                    uzTokens.any { it == clean } -> 1
+                    else -> -1
+                }
+                minOf(if (enRank >= 0) enRank else 99, if (uzRank >= 0) uzRank else 99).takeIf { it != 99 } ?: -1
+            }
+        }
+    }
+
+    private fun normalizeSearchText(text: String): String {
+        return text.trim()
+            .lowercase(java.util.Locale.ROOT)
+            .replace("ʻ", "'")
+            .replace("ʼ", "'")
+            .replace("’", "'")
+            .replace("‘", "'")
+            .replace("`", "'")
+            .replace("′", "'")
+            .replace("ʹ", "'")
+    }
+
+    private fun stripApostrophes(normalizedText: String): String {
+        return normalizedText.replace("'", "")
     }
 
     fun getSynonymsAndAntonyms(): Flow<List<WordEntity>> {
@@ -277,7 +389,7 @@ class VocabularyRepository(private val context: Context) {
         unitProgressDao.markUnitPassed(bookNum, unitNum, score)
         if (unitNum < 30) {
             unitProgressDao.unlockUnit(bookNum, unitNum + 1)
-        } else if (bookNum < 4) {
+        } else if (bookNum < 6) {
             unitProgressDao.unlockUnit(bookNum + 1, 1)
         }
         // Record streak
@@ -345,7 +457,8 @@ class VocabularyRepository(private val context: Context) {
     }
 
     suspend fun getAiExplanation(word: String, definition: String): String = withContext(Dispatchers.IO) {
-        geminiHelper.explainWord(word, definition)
+        // Disabled: fetch definition from static dataset only, not dynamic API
+        "Definiton: $definition"
     }
 
     suspend fun exportProgressAsJson(): String = withContext(Dispatchers.IO) {
@@ -402,5 +515,60 @@ class VocabularyRepository(private val context: Context) {
             sb.append("Word,${w.bookNumber},${w.unitNumber},\"${w.word}\",\"${w.uzbekTranslation}\",true,,${w.learnedTimestamp}\n")
         }
         sb.toString()
+    }
+
+    enum class ReviewGrade {
+        AGAIN, GOOD, EASY
+    }
+
+    fun getAllWords(): Flow<List<WordEntity>> {
+        return wordDao.getAllWords()
+    }
+
+    fun getDueWords(): Flow<List<WordEntity>> {
+        return wordDao.getDueWords()
+    }
+
+    fun getDueWordsCount(): Flow<Int> {
+        return wordDao.getDueWordsCount()
+    }
+
+    suspend fun reviewWord(wordId: Long, grade: ReviewGrade) = withContext(Dispatchers.IO) {
+        val word = wordDao.getWordById(wordId) ?: return@withContext
+        var interval = word.repetitionIntervalDays
+        var repCount = word.repetitionCount
+        var ease = word.easeFactor
+
+        when (grade) {
+            ReviewGrade.AGAIN -> {
+                interval = 1
+                repCount = 0
+                ease = maxOf(1.3f, ease - 0.2f)
+            }
+            ReviewGrade.GOOD -> {
+                if (repCount == 0) {
+                    interval = 1
+                } else if (repCount == 1) {
+                    interval = 3
+                } else {
+                    interval = maxOf(1, (interval * ease).toInt())
+                }
+                repCount++
+                ease = maxOf(1.3f, ease + 0.05f)
+            }
+            ReviewGrade.EASY -> {
+                if (repCount == 0) {
+                    interval = 4
+                } else {
+                    interval = maxOf(1, (interval * ease * 1.3f).toInt())
+                }
+                repCount++
+                ease = maxOf(1.3f, ease + 0.15f)
+            }
+        }
+
+        val nextReview = System.currentTimeMillis() + (interval.toLong() * 24L * 3600L * 1000L)
+        wordDao.updateSpacedRepetition(wordId, nextReview, interval, repCount, ease)
+        wordDao.updateLearnedStatus(wordId, true)
     }
 }
